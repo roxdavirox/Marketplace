@@ -7,5 +7,7 @@
 
         public static string GetConnectionString(string catalog) =>
             $@"Data Source=.\SQLEXPRESS;Initial Catalog={catalog};Integrated Security=True";
+
+        public static string MediatRAssemblyName = "Marketplace.App";
     }
 }
