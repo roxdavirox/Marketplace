@@ -20,11 +20,11 @@ namespace Marketplace.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CreateProductResponse>> Post(CreateProductRequest request)
+        public async Task<IActionResult> Post(CreateProductRequest request)
         {
             var response = await _mediator.Send(request);
 
-            return response;
+            return Ok(response);
         }
     }
 }

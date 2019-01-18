@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Marketplace.App.Services.Handlers.Products;
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
 using Marketplace.Infra.Data.Repositories;
@@ -33,7 +35,8 @@ namespace Marketplace.Api
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddMediatR();
+            //services.AddMediatR(typeof(CreateProductHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(CreateProductHandler));
 
             services.AddScoped<MarketplaceContext, MarketplaceContext>();
 
