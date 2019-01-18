@@ -1,4 +1,4 @@
-﻿using Marketplace.App.Services.Handlers.Product;
+﻿using Marketplace.App.Services.Handlers.Products;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,7 +20,7 @@ namespace Marketplace.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductResponse>> Post(ProductRequest request)
+        public async Task<ActionResult<CreateProductResponse>> Post(CreateProductRequest request)
         {
             var response = await _mediator.Send(request);
 
