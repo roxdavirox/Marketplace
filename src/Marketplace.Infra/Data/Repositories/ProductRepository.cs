@@ -14,16 +14,12 @@ namespace Marketplace.Infra.Data.Repositories
             _context = context;
         }
 
-        public void Create(Product product)
-        {
+        public void Create(Product product) =>
             _context.Products.Add(product);
-            _context.SaveChanges();
-        }
-
+         
         public async Task<Product> CreateAsync(Product product)
         {
             await _context.AddAsync(product);
-            await _context.SaveChangesAsync();
 
             return product;
         }
