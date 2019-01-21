@@ -1,4 +1,5 @@
-﻿using Marketplace.Domain.Interfaces.Repositories;
+﻿using Marketplace.Api.Filters;
+using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
 using Marketplace.Infra.Data.Repositories;
 using Marketplace.Infra.IoC.Containers;
@@ -23,7 +24,7 @@ namespace Marketplace.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
+            services.AddMvc(options => options.Filters.Add<NotificationFilter>())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMediatRDependencyHandlers();
