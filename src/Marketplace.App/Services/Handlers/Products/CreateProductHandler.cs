@@ -30,7 +30,7 @@ namespace Marketplace.App.Services.Handlers.Products
             if (product.Invalid)
             {
                 _notificationContext.AddNotifications(product.ValidationResult);
-                return null;
+                return Task.FromResult(new CreateProductResponse());
             }
 
             _repository.Create(product);

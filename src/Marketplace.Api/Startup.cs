@@ -1,4 +1,5 @@
 ﻿using Marketplace.Api.Filters;
+using Marketplace.App.Notifications;
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
 using Marketplace.Infra.Data.Repositories;
@@ -30,6 +31,8 @@ namespace Marketplace.Api
             services.AddMediatRDependencyHandlers();
 
             services.AddScoped<MarketplaceContext, MarketplaceContext>();
+
+            services.AddScoped<NotificationContext, NotificationContext>();
 
             services.AddTransient<IProductRepository, ProductRepository>();
 
