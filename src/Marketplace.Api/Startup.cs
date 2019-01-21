@@ -4,6 +4,7 @@ using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
 using Marketplace.Infra.Data.Repositories;
 using Marketplace.Infra.IoC.Containers;
+using Marketplace.Infra.Transactions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace Marketplace.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.Filters.Add<NotificationFilter>())
+            services.AddMvc(options => options.Filters.Add<AsyncFilterResult>())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMediatRDependencyHandlers();
@@ -33,6 +34,8 @@ namespace Marketplace.Api
             services.AddScoped<MarketplaceContext, MarketplaceContext>();
 
             services.AddScoped<NotificationContext, NotificationContext>();
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddTransient<IProductRepository, ProductRepository>();
 

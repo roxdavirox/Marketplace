@@ -1,4 +1,5 @@
 ﻿using Marketplace.App.Notifications;
+using Marketplace.Infra.Transactions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -10,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace Marketplace.Api.Filters
 {
-    public class NotificationFilter : IAsyncResultFilter
+    public class AsyncFilterResult : IAsyncResultFilter
     {
 
         private readonly NotificationContext _notificationContext;
+        private readonly IUnitOfWork _uof;
 
-        public NotificationFilter(NotificationContext notificationContext)
+        public AsyncFilterResult(NotificationContext notificationContext)
         {
             _notificationContext = notificationContext;
         }
@@ -35,6 +37,8 @@ namespace Marketplace.Api.Filters
 
                 return;
             }
+
+            await _uof.CommitAsync();
 
             await next();
         }
