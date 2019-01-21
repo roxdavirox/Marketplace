@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Marketplace.Domain.Entities.Base;
+﻿using Marketplace.Domain.Entities.Base;
 using Marketplace.Domain.Validators;
 
 namespace Marketplace.Domain.Entities
