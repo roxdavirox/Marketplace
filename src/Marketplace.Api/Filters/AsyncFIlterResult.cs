@@ -16,10 +16,11 @@ namespace Marketplace.Api.Filters
 
         private readonly NotificationContext _notificationContext;
         private readonly IUnitOfWork _uof;
-
-        public AsyncFilterResult(NotificationContext notificationContext)
+        
+        public AsyncFilterResult(NotificationContext notificationContext, IUnitOfWork uof)
         {
             _notificationContext = notificationContext;
+            _uof = uof;
         }
 
         public async Task OnResultExecutionAsync(
