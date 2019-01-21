@@ -1,6 +1,7 @@
 ﻿using Marketplace.Domain.Entities;
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
+using System.Threading.Tasks;
 
 namespace Marketplace.Infra.Data.Repositories
 {
@@ -17,6 +18,14 @@ namespace Marketplace.Infra.Data.Repositories
         {
             _context.Products.Add(product);
             _context.SaveChanges();
+        }
+
+        public async Task<Product> CreateAsync(Product product)
+        {
+            await _context.AddAsync(product);
+            await _context.SaveChangesAsync();
+
+            return product;
         }
     }
 }

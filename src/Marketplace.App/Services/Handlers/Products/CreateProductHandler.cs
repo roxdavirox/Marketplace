@@ -21,23 +21,20 @@ namespace Marketplace.App.Services.Handlers.Products
             _notificationContext = notificationContext;
         }
 
-        public Task<CreateProductResponse> Handle(CreateProductRequest request, CancellationToken cancellationToken)
+        public async Task<CreateProductResponse> Handle(
+            CreateProductRequest request, CancellationToken cancellationToken)
         {
-            if (request == null) return null;
-
             var product = new Product(request.Name);
 
             if (product.Invalid)
             {
                 _notificationContext.AddNotifications(product.ValidationResult);
-                return Task.FromResult(new CreateProductResponse());
+                return (CreateProductResponse)product;
             }
 
-            _repository.Create(product);
+            await _repository.CreateAsync(product);
 
-            var response = (CreateProductResponse)product;
-
-            return Task.FromResult(response);
+            return (CreateProductResponse)product;
         }
     }
 }
