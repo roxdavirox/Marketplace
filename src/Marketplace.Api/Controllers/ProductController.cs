@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Marketplace.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]s")]
     [ApiController]
     public class ProductController : ControllerBase
     {
