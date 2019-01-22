@@ -27,7 +27,7 @@ namespace Marketplace.App.Services.Handlers.Options
             if(option.Invalid)
             {
                 _notificationContext.AddNotifications(option.ValidationResult);
-                return (CreateOptionResponse)option;
+                return null;
             }
 
             await _optionRepository.CreateAsync(option);
