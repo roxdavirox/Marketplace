@@ -1,6 +1,7 @@
 ﻿using Marketplace.App.Services.Handlers.Options;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Marketplace.Api.Controllers
@@ -16,8 +17,12 @@ namespace Marketplace.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("api/Products/Options")]
-        public async Task<CreateOptionResponse> Post(CreateOptionRequest request) =>
-            await _mediator.Send(request);
+        [HttpPost("api/Products/{idProduct:Guid}/Options")]
+        public async Task<CreateOptionResponse> Post(CreateOptionRequest request, Guid idProduct)
+        {
+            request.HasRelationshipWith(idProduct);
+            return await _mediator.Send(request);
+        }
+
     }
 }
