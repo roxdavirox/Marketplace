@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Marketplace.Api.Controllers
 {
-    [Route("api/[Controller]s")]
     [ApiController]
     public class OptionController : ControllerBase
     {
@@ -18,11 +17,15 @@ namespace Marketplace.Api.Controllers
         }
 
         [HttpPost("api/Products/{idProduct:Guid}/Options")]
-        public async Task<CreateOptionResponse> Post(CreateOptionRequest request, Guid idProduct)
+        public async Task<CreateOptionResponse> Post(CreateProductOptionRequest request, Guid idProduct)
         {
-            request.HasRelationshipWith(idProduct);
-            return await _mediator.Send(request);
+            var command = new CreateProductOptionRequest(request, idProduct);
+            return await _mediator.Send(command);
         }
+
+        [HttpPost("api/Options")]
+        public async Task<CreateOptionResponse> Post(CreateOptionRequest request) =>
+            await _mediator.Send(request);
 
     }
 }

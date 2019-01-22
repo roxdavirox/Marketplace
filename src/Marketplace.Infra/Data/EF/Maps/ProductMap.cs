@@ -9,6 +9,7 @@ namespace Marketplace.Infra.Data.EF.Maps
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.HasKey(p => p.Id);
+            builder.ToTable(nameof(Product));
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Marketplace.Infra.Data.EF.Maps
         public void Configure(EntityTypeBuilder<Option> builder)
         {
             builder.HasKey(p => p.Id);
+            builder.ToTable(nameof(Option));
 
             builder.HasOne(p => p.Product)
                 .WithMany(p => p.Options);

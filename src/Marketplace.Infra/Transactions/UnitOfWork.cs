@@ -14,6 +14,6 @@ namespace Marketplace.Infra.Transactions
 
         public void Commit() => _context.SaveChanges();
 
-        public Task<int> CommitAsync() => _context.SaveChangesAsync();
+        public async Task<int> CommitAsync() => await _context.SaveChangesAsync();
     }
 }

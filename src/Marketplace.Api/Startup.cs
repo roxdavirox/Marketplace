@@ -38,6 +38,7 @@ namespace Marketplace.Api
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IOptionRepository, OptionRepository>();
 
             services.AddSwaggerGen(c =>
                c.SwaggerDoc("v1", new Info { Title = "Marketplace API", Version = "v1" })

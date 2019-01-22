@@ -8,6 +8,7 @@ namespace Marketplace.Infra.Data.EF.Context
     public class MarketplaceContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Option> Options { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,6 +18,7 @@ namespace Marketplace.Infra.Data.EF.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProductMap());
+            modelBuilder.ApplyConfiguration(new OptionMap());
 
             base.OnModelCreating(modelBuilder);
         }
