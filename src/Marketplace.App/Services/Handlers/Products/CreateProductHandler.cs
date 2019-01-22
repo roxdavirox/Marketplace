@@ -29,7 +29,7 @@ namespace Marketplace.App.Services.Handlers.Products
             if (product.Invalid)
             {
                 _notificationContext.AddNotifications(product.ValidationResult);
-                return (CreateProductResponse)product;
+                return null;
             }
 
             await _repository.CreateAsync(product);
