@@ -5,6 +5,6 @@ namespace Marketplace.Domain.Interfaces.Repositories
 {
     public interface IItemRepository
     {
-        Task<int> CreateAsync(Item item);
+        Task<Item> CreateAsync(Item item);
     }
 }
