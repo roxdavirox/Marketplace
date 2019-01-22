@@ -1,5 +1,7 @@
 ﻿using Marketplace.Domain.Entities.Base;
 using Marketplace.Domain.Validators;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Marketplace.Domain.Entities
 {
@@ -21,6 +23,7 @@ namespace Marketplace.Domain.Entities
         }
 
         public string Name { get; set; }
+        public IEnumerable<Item> Items { get; set; }
         public virtual Product Product { get; set; }
     }
 }

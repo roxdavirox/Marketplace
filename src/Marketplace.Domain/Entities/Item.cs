@@ -13,5 +13,6 @@ namespace Marketplace.Domain.Entities
         }
 
         public string Name { get; set; }
+        public virtual Option Option { get; set; }
     }
 }
