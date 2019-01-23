@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Marketplace.App.Services.Handlers.Options
 {
@@ -9,6 +7,8 @@ namespace Marketplace.App.Services.Handlers.Options
     {
         public string Name { get; set; }
         internal Guid IdItem { get; set; }
+
+        public CreateOptionItemRequest() { }
 
         public CreateOptionItemRequest(CreateOptionItemRequest request, Guid idItem)
         {
