@@ -30,6 +30,16 @@ namespace Marketplace.Api.Controllers
         [HttpPut("api/Options/Items")]
         public async Task<PutOptionItemResponse> Put(PutOptionItemRequest request) =>
             await _mediator.Send(request);
+
+        [HttpPost("api/Items/{idItem}/Options")]
+        public async Task<CreateOptionItemResponse> Post(CreateOptionItemRequest request, Guid idItem)
+        {
+            var command = new CreateOptionItemRequest(request, idItem);
+
+            var response =  await _mediator.Send(command);
+
+            return response;
+        }
         
     }
 }
