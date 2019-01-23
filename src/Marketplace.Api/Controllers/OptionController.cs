@@ -17,9 +17,9 @@ namespace Marketplace.Api.Controllers
         }
 
         [HttpPost("api/Products/{idProduct:Guid}/Options")]
-        public async Task<CreateOptionResponse> Post(CreateProductOptionRequest request, Guid idProduct)
+        public async Task<CreateOptionResponse> Post(CreateOptionProductRequest request, Guid idProduct)
         {
-            var command = new CreateProductOptionRequest(request, idProduct);
+            var command = new CreateOptionProductRequest(request, idProduct);
             return await _mediator.Send(command);
         }
 

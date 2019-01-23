@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Marketplace.App.Services.Handlers.Options
 {
-    public class CreateProductOptionHandler : IRequestHandler<CreateProductOptionRequest, CreateOptionResponse>
+    public class CreateOptionProductHandler : IRequestHandler<CreateOptionProductRequest, CreateOptionResponse>
     {
         private readonly IProductRepository _productRepository;
         private readonly IOptionRepository _optionRepository;
         private readonly NotificationContext _notificationContext;
         
-        public CreateProductOptionHandler(
+        public CreateOptionProductHandler(
             IProductRepository productRepository, 
             IOptionRepository optionRepository, 
             NotificationContext notificationContext)
@@ -24,7 +24,7 @@ namespace Marketplace.App.Services.Handlers.Options
         }
 
         public async Task<CreateOptionResponse> Handle(
-            CreateProductOptionRequest request, CancellationToken cancellationToken)
+            CreateOptionProductRequest request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetByIdAsync(request.IdProduct);
 

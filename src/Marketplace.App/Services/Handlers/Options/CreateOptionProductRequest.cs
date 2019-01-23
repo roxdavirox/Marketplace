@@ -3,17 +3,17 @@ using System;
 
 namespace Marketplace.App.Services.Handlers.Options
 {
-    public class CreateProductOptionRequest : IRequest<CreateOptionResponse>
+    public class CreateOptionProductRequest : IRequest<CreateOptionResponse>
     {
         internal Guid IdProduct { get; private set; }
         public string Name { get; set; }
 
-        public CreateProductOptionRequest()
+        public CreateOptionProductRequest()
         {
 
         }
 
-        public CreateProductOptionRequest(CreateProductOptionRequest request, Guid idProduct)
+        public CreateOptionProductRequest(CreateOptionProductRequest request, Guid idProduct)
         {
             Name = request.Name;
             IdProduct = idProduct;
