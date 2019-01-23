@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace Marketplace.Api.Controllers
 {
-    [Route("api/[controller]s")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -16,8 +15,12 @@ namespace Marketplace.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("api/Products")]
         public async Task<CreateProductResponse> Post(CreateProductRequest request) =>
+            await _mediator.Send(request);
+
+        [HttpPut("api/Products/Options")]
+        public async Task<PutProductOptionResponse> Put(PutProductOptionRequest request) =>
             await _mediator.Send(request);
     }
 }
