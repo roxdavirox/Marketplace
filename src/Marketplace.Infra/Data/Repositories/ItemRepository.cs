@@ -1,6 +1,7 @@
 ﻿using Marketplace.Domain.Entities;
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
+using System;
 using System.Threading.Tasks;
 
 namespace Marketplace.Infra.Data.Repositories
@@ -19,5 +20,8 @@ namespace Marketplace.Infra.Data.Repositories
             await _context.Items.AddAsync(item);
             return item;
         }
+
+        public async Task<Item> GetByIdAsync(Guid idItem) =>
+            await _context.Items.FindAsync(idItem);
     }
 }

@@ -27,5 +27,9 @@ namespace Marketplace.Api.Controllers
         public async Task<CreateOptionResponse> Post(CreateOptionRequest request) =>
             await _mediator.Send(request);
 
+        [HttpPut("api/Options/Items")]
+        public async Task<PutOptionItemResponse> Put(PutOptionItemRequest request) =>
+            await _mediator.Send(request);
+        
     }
 }
