@@ -26,7 +26,7 @@ namespace Marketplace.App.Services.Handlers.Items
         public async Task<CreateItemResponse> Handle(
             CreateItemOptionRequest request, CancellationToken cancellationToken)
         {
-            var option = await _optionRepository.GetByIdASync(request.IdOption);
+            var option = await _optionRepository.GetByIdAsync(request.IdOption);
 
             if(option == null)
             {
