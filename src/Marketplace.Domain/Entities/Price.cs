@@ -9,6 +9,11 @@ namespace Marketplace.Domain.Entities
             Fixed = @fixed;
         }
 
+        public Price()
+        {
+            Fixed = false;
+        }
+
         public bool Fixed { get; private set; }
     }
 }
