@@ -20,6 +20,21 @@ namespace Marketplace.Domain.Entities
             Validate(this, new ItemValidator());
         }
 
+        public Item(string name, Price price)
+        {
+            Name = name;
+            Price = price;
+        }
+
+        public Item(string name, Price price, Option option)
+        {
+            Name = name;
+            Price = price;
+            Option = option;
+
+            Validate(this, new ItemValidator());
+        }
+
         public string Name { get; set; }
         public Price Price { get; set; }
         public virtual Option Option { get; set; }
