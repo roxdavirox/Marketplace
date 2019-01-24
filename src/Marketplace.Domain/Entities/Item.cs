@@ -21,6 +21,7 @@ namespace Marketplace.Domain.Entities
         }
 
         public string Name { get; set; }
+        public Price Price { get; set; }
         public virtual Option Option { get; set; }
 
         public void AssociateWith(Option option)
