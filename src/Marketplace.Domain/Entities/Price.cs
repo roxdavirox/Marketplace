@@ -11,6 +11,13 @@ namespace Marketplace.Domain.Entities
             Value = value;
         }
 
+        public Price()
+        {
+            Start = 1;
+            End = int.MaxValue;
+            Value = 0;
+        }
+
         public int Index { get; private set; }
         public int Start { get; private set; }
         public int End { get; private set; }
