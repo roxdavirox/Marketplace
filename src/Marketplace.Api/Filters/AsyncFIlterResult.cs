@@ -12,12 +12,12 @@ namespace Marketplace.Api.Filters
     {
 
         private readonly NotificationContext _notificationContext;
-        private readonly IUnitOfWork _uof;
+        private readonly IUnitOfWork _uow;
         
-        public AsyncFilterResult(NotificationContext notificationContext, IUnitOfWork uof)
+        public AsyncFilterResult(NotificationContext notificationContext, IUnitOfWork uow)
         {
             _notificationContext = notificationContext;
-            _uof = uof;
+            _uow = uow;
         }
 
         public async Task OnResultExecutionAsync(
@@ -36,7 +36,7 @@ namespace Marketplace.Api.Filters
                 return;
             }
 
-            await _uof.CommitAsync();
+            await _uow.CommitAsync();
 
             await next();
         }
