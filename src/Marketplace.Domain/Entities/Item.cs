@@ -12,14 +12,6 @@ namespace Marketplace.Domain.Entities
             Validate(this, new ItemValidator());
         }
 
-        public Item(string name, Option option)
-        {
-            Name = name;
-            Option = option;
-
-            Validate(this, new ItemValidator());
-        }
-
         public Item(string name, Price price)
         {
             Name = name;
