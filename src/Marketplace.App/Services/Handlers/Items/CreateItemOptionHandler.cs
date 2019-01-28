@@ -2,6 +2,7 @@
 using Marketplace.Domain.Entities;
 using Marketplace.Domain.Interfaces.Repositories;
 using MediatR;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,8 +15,8 @@ namespace Marketplace.App.Services.Handlers.Items
         private readonly IOptionRepository _optionRepository;
 
         public CreateItemOptionHandler(
-            NotificationContext notificationContext, 
-            IItemRepository itemRepository, 
+            NotificationContext notificationContext,
+            IItemRepository itemRepository,
             IOptionRepository optionRepository)
         {
             _notificationContext = notificationContext;
@@ -28,15 +29,17 @@ namespace Marketplace.App.Services.Handlers.Items
         {
             var option = await _optionRepository.GetByIdAsync(request.IdOption);
 
-            if(option == null)
+            if (option == null)
             {
                 _notificationContext.AddNotification("Option null", "Opção não encontrada");
                 return null;
             }
 
-            var item = new Item(request.Name, option);
+            var prices = new List<Price>() { new Price() };
 
-            if(item.Invalid)
+            var item = new Item(request.Name, prices, option);
+
+            if (item.Invalid)
             {
                 _notificationContext.AddNotifications(item.ValidationResult);
                 return null;
