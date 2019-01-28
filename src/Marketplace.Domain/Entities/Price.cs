@@ -4,30 +4,16 @@ namespace Marketplace.Domain.Entities
 {
     public class Price : EntityBase
     {
-        public Price(bool @fixed, decimal value)
+        public Price(int start, int end, decimal value)
         {
-            Fixed = @fixed;
+            Start = start;
+            End = end;
             Value = value;
         }
 
-        public Price()
-        {
-            Fixed = false;
-            Value = 0;
-        }
-
-        public Price(bool @fixed)
-        {
-            Fixed = @fixed;
-        }
-
-        public Price(RelativePrice prices)
-        {
-            Prices = prices;
-        }
-
-        public bool Fixed { get; private set; }
+        public int Index { get; private set; }
+        public int Start { get; private set; }
+        public int End { get; private set; }
         public decimal Value { get; private set; }
-        public RelativePrice Prices { get; set; }
     }
 }
