@@ -21,6 +21,7 @@ namespace Marketplace.Infra.Data.EF.Context
             modelBuilder.ApplyConfiguration(new ProductMap());
             modelBuilder.ApplyConfiguration(new OptionMap());
             modelBuilder.ApplyConfiguration(new ItemMap());
+            modelBuilder.ApplyConfiguration(new PriceMap());
 
             base.OnModelCreating(modelBuilder);
         }
