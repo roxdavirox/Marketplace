@@ -11,9 +11,13 @@ namespace Marketplace.Infra.Data.EF.Maps
             builder.ToTable(nameof(Price));
             builder.HasKey(_ => _.Id);
 
+            builder.Property(p => p.Index)
+                .ValueGeneratedOnAdd();
+
             builder.HasOne(_ => _.Item)
                 .WithMany(_ => _.Prices)
                 .HasForeignKey("IdItem");
+
         }
     }
 }
