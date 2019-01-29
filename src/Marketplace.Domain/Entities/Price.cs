@@ -4,18 +4,11 @@ namespace Marketplace.Domain.Entities
 {
     public class Price : EntityBase
     {
-        public Price(int start, int end, decimal value)
+        public Price(int start = 1, int end = int.MaxValue, decimal value = 0)
         {
             Start = start;
             End = end;
             Value = value;
-        }
-
-        public Price()
-        {
-            Start = 1;
-            End = int.MaxValue;
-            Value = 0;
         }
 
         public int Index { get; private set; }
