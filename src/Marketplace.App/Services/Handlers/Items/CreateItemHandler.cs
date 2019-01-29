@@ -37,7 +37,17 @@ namespace Marketplace.App.Services.Handlers.Items
 
             await _itemRepository.CreateAsync(item);
 
-            var prices = request.Prices.Select(p => new Price(item, p.Start, p.End, p.Value)); ;
+            var prices = request.Prices.Select(p => new Price(item, p.Start, p.End, p.Value));
+
+            var invalidPrices = prices.Where(p => p.Invalid);
+
+            var invalidPrice = invalidPrices.Count() > 0;
+
+            if(invalidPrice)
+            {
+                invalidPrices.ForEach(p => _notificationContext.AddNotifications(p.ValidationResult));
+                return null;
+            }
 
             await _priceRepository.CreateAsync(prices);
             
