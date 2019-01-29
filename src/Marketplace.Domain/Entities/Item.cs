@@ -21,11 +21,9 @@ namespace Marketplace.Domain.Entities
             Validate(this, new ItemValidator());
         }
 
-        public Item(string name, IEnumerable<Price> prices, Option option)
+        public Item(string name, Option option)
         {
             Name = name;
-            Prices = prices;
-            Option = option;
 
             Validate(this, new ItemValidator());
         }

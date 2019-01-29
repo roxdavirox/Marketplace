@@ -14,7 +14,7 @@ namespace Marketplace.App.Services.Handlers.Items
             public decimal Value { get; set; }
         }
 
-        public IEnumerable<_Price> Prices { get; set; }
+        public ICollection<_Price> Prices { get; set; }
 
     }
 }

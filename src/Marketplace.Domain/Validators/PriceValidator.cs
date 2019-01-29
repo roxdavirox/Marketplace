@@ -7,6 +7,7 @@ namespace Marketplace.Domain.Validators
     {
         public PriceValidator()
         {
+            RuleFor(_ => _.Start).NotEmpty().WithMessage("Start nao pode ser vazio");
         }
     }
 }

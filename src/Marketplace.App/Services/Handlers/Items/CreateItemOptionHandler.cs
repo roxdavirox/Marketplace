@@ -34,10 +34,8 @@ namespace Marketplace.App.Services.Handlers.Items
                 _notificationContext.AddNotification("Option null", "Opção não encontrada");
                 return null;
             }
-
-            var prices = new List<Price>() { new Price() };
-
-            var item = new Item(request.Name, prices, option);
+            
+            var item = new Item(request.Name, option);
 
             if (item.Invalid)
             {
