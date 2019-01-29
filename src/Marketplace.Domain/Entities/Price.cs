@@ -7,6 +7,7 @@ namespace Marketplace.Domain.Entities
     {
         public Price(Item item, int start = 1, int end = int.MaxValue, decimal value = 0)
         {
+            Item = item;
             Start = start;
             End = end;
             Value = value;

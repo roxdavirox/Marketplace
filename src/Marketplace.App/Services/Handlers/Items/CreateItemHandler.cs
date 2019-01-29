@@ -27,10 +27,7 @@ namespace Marketplace.App.Services.Handlers.Items
         public async Task<CreateItemResponse> Handle(
             CreateItemRequest request, CancellationToken cancellationToken)
         {
-            
             var item = new Item(request.Name);
-
-            var prices = request.Prices.Select(p => new Price(item, p.Start, p.End, p.Value)); ;
 
             if (item.Invalid)
             {
@@ -38,10 +35,12 @@ namespace Marketplace.App.Services.Handlers.Items
                 return null;
             }
 
-            await _priceRepository.CreateAsync(prices);
-
             await _itemRepository.CreateAsync(item);
 
+            var prices = request.Prices.Select(p => new Price(item, p.Start, p.End, p.Value)); ;
+
+            await _priceRepository.CreateAsync(prices);
+            
             return (CreateItemResponse)item;
         }
     }
