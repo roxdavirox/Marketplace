@@ -22,5 +22,6 @@ namespace Marketplace.Domain.Entities
         public int Start { get; private set; }
         public int End { get; private set; }
         public decimal Value { get; private set; }
+        public virtual Item Item { get; private set; }
     }
 }
