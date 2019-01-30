@@ -1,6 +1,5 @@
 ﻿using Marketplace.Domain.Entities.Base;
 using Marketplace.Domain.Validators;
-using System.Collections.Generic;
 
 namespace Marketplace.Domain.Entities
 {
@@ -13,10 +12,10 @@ namespace Marketplace.Domain.Entities
             Validate(this, new ItemValidator());
         }
 
-        public Item(string name, IEnumerable<Price> prices)
+        public Item(string name, PriceInterval priceInterval)
         {
             Name = name;
-            Prices = prices;
+            PriceInterval = priceInterval;
 
             Validate(this, new ItemValidator());
         }
@@ -29,7 +28,7 @@ namespace Marketplace.Domain.Entities
         }
 
         public string Name { get; set; }
-        public IEnumerable<Price> Prices { get; set; }
+        public PriceInterval PriceInterval { get; private set; }
         public virtual Option Option { get; set; }
 
         public void AssociateWith(Option option)
