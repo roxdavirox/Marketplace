@@ -5,9 +5,9 @@ namespace Marketplace.Domain.Entities
 {
     public class Price : EntityBase
     {
-        public Price(PriceInterval priceInterval, int start = 1, int end = int.MaxValue, decimal value = 0)
+        public Price(PriceRange priceRange, int start = 1, int end = int.MaxValue, decimal value = 0)
         {
-            PriceInterval = priceInterval;
+            PriceRange = priceRange;
             Start = start;
             End = end;
             Value = value;
@@ -29,11 +29,11 @@ namespace Marketplace.Domain.Entities
         public int Start { get; private set; }
         public int End { get; private set; }
         public decimal Value { get; private set; }
-        public virtual PriceInterval PriceInterval { get; private set; }
+        public virtual PriceRange PriceRange { get; private set; }
 
-        public void AssociateWith(PriceInterval priceInterval)
+        public void AssociateWith(PriceRange priceRange)
         {
-            PriceInterval = priceInterval;
+            PriceRange = priceRange;
         }
     }
 }

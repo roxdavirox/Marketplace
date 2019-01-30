@@ -12,10 +12,10 @@ namespace Marketplace.Domain.Entities
             Validate(this, new ItemValidator());
         }
 
-        public Item(string name, PriceInterval priceInterval)
+        public Item(string name, PriceRange priceRange)
         {
             Name = name;
-            PriceInterval = priceInterval;
+            PriceRange = priceRange;
 
             Validate(this, new ItemValidator());
         }
@@ -28,7 +28,7 @@ namespace Marketplace.Domain.Entities
         }
 
         public string Name { get; set; }
-        public PriceInterval PriceInterval { get; private set; }
+        public PriceRange PriceRange { get; private set; }
         public virtual Option Option { get; set; }
 
         public void AssociateWith(Option option)
