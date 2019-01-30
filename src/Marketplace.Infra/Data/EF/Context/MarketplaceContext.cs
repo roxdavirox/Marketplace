@@ -11,7 +11,7 @@ namespace Marketplace.Infra.Data.EF.Context
         public DbSet<Option> Options { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Price> Prices { get; set; }
-        public DbSet<PriceInterval> PriceRange { get; set; }
+        public DbSet<PriceRange> PriceRange { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,6 +24,7 @@ namespace Marketplace.Infra.Data.EF.Context
             modelBuilder.ApplyConfiguration(new OptionMap());
             modelBuilder.ApplyConfiguration(new ItemMap());
             modelBuilder.ApplyConfiguration(new PriceMap());
+            modelBuilder.ApplyConfiguration(new PriceRangeMap());
 
             base.OnModelCreating(modelBuilder);
         }
