@@ -41,7 +41,7 @@ namespace Marketplace.App.Services.Handlers.Items
 
             var invalidPrices = prices.Where(p => p.Invalid);
 
-            var invalidPrice = invalidPrices.Count() > 0;
+            var invalidPrice = invalidPrices.Any();
 
             if(invalidPrice)
             {
