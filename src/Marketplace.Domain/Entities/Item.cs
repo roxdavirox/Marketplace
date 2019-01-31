@@ -35,5 +35,10 @@ namespace Marketplace.Domain.Entities
         {
             Option = option;
         }
+
+        public void AssociateWith(PriceRange priceRange)
+        {
+            PriceRange = priceRange;
+        }
     }
 }
