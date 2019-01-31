@@ -18,7 +18,7 @@ namespace Marketplace.Infra.Data.EF.Maps
 
             builder.HasOne(_ => _.PriceRange)
                 .WithMany(_ => _.Items)
-                .HasForeignKey("IdItem");
+                .HasForeignKey("IdPriceRange");
 
         }
     }
