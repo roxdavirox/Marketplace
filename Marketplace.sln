@@ -5,15 +5,15 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F41DBF7D-220E-49A4-ABE1-A75D04D9BBFC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Api", "Marketplace.Api\Marketplace.Api.csproj", "{F975D992-E6FB-43F8-8891-3C56C26F6B35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Api", "src\Marketplace.Api\Marketplace.Api.csproj", "{F975D992-E6FB-43F8-8891-3C56C26F6B35}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Infra", "Marketplace.Infra\Marketplace.Infra.csproj", "{D998EB34-D42D-481D-83FD-2CBF26B9B29D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Infra", "src\Marketplace.Infra\Marketplace.Infra.csproj", "{D998EB34-D42D-481D-83FD-2CBF26B9B29D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Domain", "Marketplace.Domain\Marketplace.Domain.csproj", "{CFCF6CAD-EF22-4AC8-9CE1-10CE189F136A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Domain", "src\Marketplace.Domain\Marketplace.Domain.csproj", "{CFCF6CAD-EF22-4AC8-9CE1-10CE189F136A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Shared", "Marketplace.Shared\Marketplace.Shared.csproj", "{6135B849-531F-4039-831C-35F49699DA1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Shared", "src\Marketplace.Shared\Marketplace.Shared.csproj", "{6135B849-531F-4039-831C-35F49699DA1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.App", "Marketplace.App\Marketplace.App.csproj", "{B66E4D1F-7B69-4021-B719-209AA9CCDF60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.App", "src\Marketplace.App\Marketplace.App.csproj", "{B66E4D1F-7B69-4021-B719-209AA9CCDF60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
