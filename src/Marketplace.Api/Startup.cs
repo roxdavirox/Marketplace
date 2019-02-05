@@ -43,7 +43,7 @@ namespace Marketplace.Api
             services.AddTransient<IPriceRepository, PriceRepository>();
 
             services.AddSwaggerGen(c =>
-               c.SwaggerDoc("v1", new Info { Title = "Marketplace API", Version = "v1" })
+               c.SwaggerDoc("v1", new Info { Title = $"Marketplace API - {Configuration["ConnectionString"]}", Version = "v1" })
            );
         }
 
