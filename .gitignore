@@ -10,8 +10,13 @@ https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 *.user
 *.userosscache
 *.sln.docstates
-
+#ignora pasta do migrations
 migrations/
+
+# ignore appsettings configuration files
+**/appsettings.development.json
+**/appsettings.staging.json
+**/appsettings.production.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
