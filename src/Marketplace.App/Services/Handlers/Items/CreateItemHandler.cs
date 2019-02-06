@@ -12,22 +12,34 @@ namespace Marketplace.App.Services.Handlers.Items
     {
         private readonly IItemRepository _itemRepository;
         private readonly IPriceRepository _priceRepository;
+        private readonly IPriceRangeRepository _priceRangeRepository;
         private readonly NotificationContext _notificationContext;
 
         public CreateItemHandler(
             IItemRepository itemRepository, 
             IPriceRepository priceRepository, 
+            IPriceRangeRepository priceRangeRepository, 
             NotificationContext notificationContext)
         {
             _itemRepository = itemRepository;
             _priceRepository = priceRepository;
+            _priceRangeRepository = priceRangeRepository;
             _notificationContext = notificationContext;
         }
 
         public async Task<CreateItemResponse> Handle(
             CreateItemRequest request, CancellationToken cancellationToken)
         {
+            var priceRange = new PriceRange();
+
+            if (priceRange.Invalid)
+            {
+                _notificationContext.AddNotifications(priceRange.ValidationResult);
+                return null;
+            }
+
             var item = new Item(request.Name);
+            item.AssociateWith(priceRange);
 
             if (item.Invalid)
             {
@@ -35,9 +47,11 @@ namespace Marketplace.App.Services.Handlers.Items
                 return null;
             }
 
-            await _itemRepository.CreateAsync(item);
+            var prices = request.Prices
+                .Select(p => new Price(p.Start, p.End, p.Value))
+                .ToList();
 
-            var prices = request.Prices.Select(p => new Price(item, p.Start, p.End, p.Value));
+            prices.ForEach(p => p.AssociateWith(priceRange));
 
             var invalidPrices = prices.Where(p => p.Invalid);
 
@@ -49,8 +63,12 @@ namespace Marketplace.App.Services.Handlers.Items
                 return null;
             }
 
+            await _priceRangeRepository.CreateAsync(priceRange);
+
+            await _itemRepository.CreateAsync(item);
+
             await _priceRepository.CreateAsync(prices);
-            
+
             return (CreateItemResponse)item;
         }
     }

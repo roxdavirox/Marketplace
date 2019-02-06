@@ -5,9 +5,8 @@ namespace Marketplace.Domain.Entities
 {
     public class Price : EntityBase
     {
-        public Price(Item item, int start = 1, int end = int.MaxValue, decimal value = 0)
+        public Price(int start = 1, int end = int.MaxValue, decimal value = 0)
         {
-            Item = item;
             Start = start;
             End = end;
             Value = value;
@@ -29,6 +28,11 @@ namespace Marketplace.Domain.Entities
         public int Start { get; private set; }
         public int End { get; private set; }
         public decimal Value { get; private set; }
-        public virtual Item Item { get; private set; }
+        public PriceRange PriceRange { get; private set; }
+
+        public void AssociateWith(PriceRange priceRange)
+        {
+            PriceRange = priceRange;
+        }
     }
 }
