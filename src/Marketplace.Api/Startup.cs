@@ -5,6 +5,7 @@ using Marketplace.Infra.Data.EF.Context;
 using Marketplace.Infra.Data.Repositories;
 using Marketplace.Infra.IoC.Containers;
 using Marketplace.Infra.Transactions;
+using Marketplace.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace Marketplace.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Settings.SetConnectionString(Configuration["ConnectionString"]);
         }
 
         public IConfiguration Configuration { get; }
@@ -44,7 +46,7 @@ namespace Marketplace.Api
             services.AddTransient<IPriceRangeRepository, PriceRangeRepository>();
 
             services.AddSwaggerGen(c =>
-               c.SwaggerDoc("v1", new Info { Title = $"Marketplace API - {Configuration["ConnectionString"]}", Version = "v1" })
+               c.SwaggerDoc("v1", new Info { Title = $"Marketplace API", Version = "v1" })
            );
         }
 
