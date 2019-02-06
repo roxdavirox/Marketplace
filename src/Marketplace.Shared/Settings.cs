@@ -2,11 +2,9 @@
 {
     public static class Settings
     {
-        public readonly static string ConnectionString =
-            @"Data Source=.\SQLEXPRESS;Initial Catalog=Marketplace;Integrated Security=True";
-
-        public static string GetConnectionString(string catalog) =>
-            $@"Data Source=.\SQLEXPRESS;Initial Catalog={catalog};Integrated Security=True";
+        private static string _connectionString { get; set; }
+        public static string SetConnectionString(string cs) => _connectionString = cs;
+        public static string ConnectionString => _connectionString;
 
         public static string MediatRAssemblyName = "Marketplace.App";
     }
