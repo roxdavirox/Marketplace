@@ -21,8 +21,9 @@ namespace Marketplace.Api
         {
             Configuration = configuration;
             Settings.SetConnectionString(Configuration["ConnectionString"]);
+            DataConnection = Configuration["ConnectionString"];
         }
-
+        public string DataConnection { get; set; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -68,7 +69,7 @@ namespace Marketplace.Api
 
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Marketplace API v1")
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", $"Marketplace API v1 - cs({DataConnection}) - env({env.EnvironmentName})" )
             );
 
             app.UseHttpsRedirection();
