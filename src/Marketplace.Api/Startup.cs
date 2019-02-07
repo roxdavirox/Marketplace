@@ -20,7 +20,8 @@ namespace Marketplace.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Settings.SetConnectionString(Configuration["ConnectionString"]);
+            var connectionString = Configuration["ConnectionString"];
+            Settings.SetConnectionString(connectionString);
         }
 
         public IConfiguration Configuration { get; }
