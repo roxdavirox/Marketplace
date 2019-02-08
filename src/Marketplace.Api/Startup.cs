@@ -49,6 +49,8 @@ namespace Marketplace.Api
             services.AddSwaggerGen(c =>
                c.SwaggerDoc("v1", new Info { Title = $"Marketplace API", Version = "v1" })
            );
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +75,14 @@ namespace Marketplace.Api
             );
 
             app.UseHttpsRedirection();
+
+            app.UseCors(policy =>
+            {
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+                policy.AllowAnyOrigin();
+            });
+
             app.UseMvc();
         }
     }
