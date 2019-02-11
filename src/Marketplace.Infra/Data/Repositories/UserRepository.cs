@@ -1,6 +1,8 @@
 ﻿using Marketplace.Domain.Entities;
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Marketplace.Infra.Data.Repositories
@@ -20,5 +22,15 @@ namespace Marketplace.Infra.Data.Repositories
 
             return user;
         }
+
+        public async Task<User> AuthenticateAsync(string email, string password)
+        {
+            var authenticatedUser = await _context.Users.FirstOrDefaultAsync(
+                    u => u.Email == email && u.Password == password
+                );
+
+            return authenticatedUser;
+        }
+
     }
 }
