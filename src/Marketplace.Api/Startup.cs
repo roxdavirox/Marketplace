@@ -40,6 +40,7 @@ namespace Marketplace.Api
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+            services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IOptionRepository, OptionRepository>();
             services.AddTransient<IItemRepository, ItemRepository>();
