@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Marketplace.App.Services.Handlers.Options
+namespace Marketplace.App.Handlers.Options
 {
     public class PutOptionItemRequest : IRequest<PutOptionItemResponse>
     {

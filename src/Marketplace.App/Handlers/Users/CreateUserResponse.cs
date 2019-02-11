@@ -1,7 +1,7 @@
 ﻿using System;
 using Marketplace.Domain.Entities;
 
-namespace Marketplace.App.Services.Handlers.Users
+namespace Marketplace.App.Handlers.Users
 {
     public class CreateUserResponse
     {

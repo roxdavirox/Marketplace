@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Marketplace.App.Services.Handlers.Products
+namespace Marketplace.App.Handlers.Products
 {
     public class CreateProductRequest : IRequest<CreateProductResponse>
     {

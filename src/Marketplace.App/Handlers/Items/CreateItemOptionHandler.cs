@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Marketplace.App.Services.Handlers.Items
+namespace Marketplace.App.Handlers.Items
 {
     public class CreateItemOptionHandler : IRequestHandler<CreateItemOptionRequest, CreateItemResponse>
     {

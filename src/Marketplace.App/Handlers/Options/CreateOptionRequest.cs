@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Marketplace.App.Services.Handlers.Options
+namespace Marketplace.App.Handlers.Options
 {
     public class CreateOptionRequest : IRequest<CreateOptionResponse> 
     {

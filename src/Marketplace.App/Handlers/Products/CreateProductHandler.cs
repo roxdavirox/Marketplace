@@ -5,7 +5,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Marketplace.App.Services.Handlers.Products
+namespace Marketplace.App.Handlers.Products
 {
     public class CreateProductHandler : IRequestHandler<CreateProductRequest, CreateProductResponse>
     {
