@@ -1,4 +1,4 @@
-﻿using Marketplace.App.Services.Handlers.Users;
+﻿using Marketplace.App.Handlers.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

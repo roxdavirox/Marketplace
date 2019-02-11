@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System;
 
-namespace Marketplace.App.Services.Handlers.Items
+namespace Marketplace.App.Handlers.Items
 {
     public class CreateItemOptionRequest : IRequest<CreateItemResponse>
     {

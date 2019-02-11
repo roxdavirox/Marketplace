@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Marketplace.App.Services.Handlers.Users
+namespace Marketplace.App.Handlers.Users
 {
     public class CreateUserRequest : IRequest<CreateUserResponse>
     {

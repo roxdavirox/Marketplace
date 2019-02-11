@@ -4,7 +4,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Marketplace.App.Services.Handlers.Options
+namespace Marketplace.App.Handlers.Options
 {
     public class PutOptionItemHandler : IRequestHandler<PutOptionItemRequest, PutOptionItemResponse>
     {

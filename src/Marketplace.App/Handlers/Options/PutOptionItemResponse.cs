@@ -1,7 +1,7 @@
 ﻿using Marketplace.Domain.Entities;
 using System;
 
-namespace Marketplace.App.Services.Handlers.Options
+namespace Marketplace.App.Handlers.Options
 {
     public class PutOptionItemResponse
     {

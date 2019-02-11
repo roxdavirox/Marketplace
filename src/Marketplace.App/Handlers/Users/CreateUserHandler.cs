@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Marketplace.App.Services.Handlers.Users
+namespace Marketplace.App.Handlers.Users
 {
     public class CreateUserHandler : IRequestHandler<CreateUserRequest, CreateUserResponse>
     {

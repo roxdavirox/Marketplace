@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System;
 
-namespace Marketplace.App.Services.Handlers.Products
+namespace Marketplace.App.Handlers.Products
 {
     public class PutProductOptionRequest : IRequest<PutProductOptionResponse>
     {
