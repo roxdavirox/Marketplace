@@ -23,8 +23,8 @@ namespace Marketplace.App.Handlers.Users
            JsonConvert.SerializeObject(
                 new
                 {
-                    authUser.IdUser,
-                    authUser.UserName
+                    userId = authUser.IdUser,
+                    userName = authUser.UserName
                 });
     }
 }
