@@ -24,13 +24,13 @@ namespace Marketplace.App.Handlers.Users
 
         public async Task<object> Handle(AuthUserRequest request, CancellationToken cancellationToken)
         {
-            if(request.Email == null)
+            if(string.IsNullOrEmpty(request.Email))
             {
                 _notificationContext.AddNotification("Email", "Email não pode ser vazio");
                 return null;
             }
 
-            if(request.Password == null)
+            if(string.IsNullOrEmpty(request.Password))
             {
                 _notificationContext.AddNotification("Password", "Senha não pode ser vazia");
                 return null;
