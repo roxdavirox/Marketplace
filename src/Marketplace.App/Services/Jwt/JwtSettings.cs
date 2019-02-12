@@ -32,7 +32,7 @@ namespace Marketplace.App.Services.Jwt
         public int Seconds { get; private set; }
         public DateTime NotBefore { get => DateTime.Now; }
         public DateTime Expires {
-            get => NotBefore + TimeSpan.FromSeconds(Seconds);
+            get => NotBefore.AddSeconds(Seconds);
         }
 
         public SigningCredentials SigningCredentials { get; private set; }
