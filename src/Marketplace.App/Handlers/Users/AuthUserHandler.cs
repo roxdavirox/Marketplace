@@ -1,4 +1,5 @@
-﻿using Marketplace.App.Notifications;
+﻿using Marketplace.App.Extensions;
+using Marketplace.App.Notifications;
 using Marketplace.App.Services.Jwt;
 using Marketplace.Domain.Interfaces.Repositories;
 using MediatR;
@@ -37,7 +38,9 @@ namespace Marketplace.App.Handlers.Users
                 return null;
             }
 
-            var user = await _userRepository.AuthenticateAsync(request.Email, request.Password);
+            var passwordMd5 = request.Password.ToMd5();
+
+            var user = await _userRepository.AuthenticateAsync(request.Email, passwordMd5);
 
             var authUserToken = _jwtService.CreateJwt(user);
 
