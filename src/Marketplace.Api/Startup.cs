@@ -1,5 +1,6 @@
 ﻿using Marketplace.Api.Filters;
 using Marketplace.App.Notifications;
+using Marketplace.App.Services.Jwt;
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
 using Marketplace.Infra.Data.Repositories;
@@ -39,6 +40,9 @@ namespace Marketplace.Api
             services.AddScoped<NotificationContext, NotificationContext>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            services.AddSingleton<JwtSettings>();
+            services.AddScoped<IJwtService, JwtService>();
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();

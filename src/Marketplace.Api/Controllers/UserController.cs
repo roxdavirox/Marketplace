@@ -19,5 +19,9 @@ namespace Marketplace.Api.Controllers
         public async Task<CreateUserResponse> Post(CreateUserRequest request) =>
             await _mediator.Send(request);
 
+        [HttpPost("api/users/login")]
+        public async Task<object> Post(AuthUserRequest request) =>
+            await _mediator.Send(request);
+
     }
 }
