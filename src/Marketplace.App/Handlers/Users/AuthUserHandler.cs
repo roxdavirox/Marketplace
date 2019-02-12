@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Marketplace.App.Handlers.Users
 {
-    public class AuthUserHandler : IRequestHandler<AuthUserRequest, object>
+    public class AuthUserHandler : IRequestHandler<AuthUserRequest, AuthUserResponse>
     {
         private readonly IUserRepository _userRepository;
         private readonly IJwtService _jwtService;
@@ -24,7 +24,7 @@ namespace Marketplace.App.Handlers.Users
             _notificationContext = notificationContext;
         }
 
-        public async Task<object> Handle(AuthUserRequest request, CancellationToken cancellationToken)
+        public async Task<AuthUserResponse> Handle(AuthUserRequest request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(request.Email))
             {
@@ -42,9 +42,13 @@ namespace Marketplace.App.Handlers.Users
 
             var user = await _userRepository.AuthenticateAsync(request.Email, passwordMd5);
 
-            var authUserToken = _jwtService.CreateJwt(user);
+            if(user == null)
+            {
+                _notificationContext.AddNotification("User", "Usuário não encontrado");
+                return null;
+            }
 
-            return authUserToken;
+            return (AuthUserResponse) user;
         }
     }
 }
