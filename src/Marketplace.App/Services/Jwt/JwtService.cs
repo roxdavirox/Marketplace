@@ -1,4 +1,5 @@
-﻿using Marketplace.Domain.Entities;
+﻿using Marketplace.App.Handlers.Users;
+using Marketplace.Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
@@ -17,9 +18,9 @@ namespace Marketplace.App.Services.Jwt
             _jwtSettings = jwtSettings;
         }
 
-        public object CreateJwt(User user)
+        public object CreateJwt(AuthUserResponse authUser)
         {
-            var claimsIdentity = GetClaimsIdentity(user);
+            var claimsIdentity = GetClaimsIdentity(authUser);
 
             var handler = new JwtSecurityTokenHandler();
 
@@ -42,19 +43,19 @@ namespace Marketplace.App.Services.Jwt
                 expiration = _jwtSettings.Expires.ToString("yyyy-MM-dd HH:mm:ss"),
                 accessToken,
                 message = "Ok",
-                userName = user.Name
+                userName = authUser.UserName
             };
         }
 
-        private ClaimsIdentity GetClaimsIdentity(User user)
+        private ClaimsIdentity GetClaimsIdentity(AuthUserResponse authUser)
         {
             var jtiClaim = new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString());
 
-            var userClaim = new Claim("usuario", JsonConvert.SerializeObject(user));
+            var userClaim = new Claim("user", JsonConvert.SerializeObject(authUser));
 
             var claims = new[] { jtiClaim, userClaim };
 
-            var genericIdentity = new GenericIdentity(user.ToString(), "Id");
+            var genericIdentity = new GenericIdentity(authUser.ToString(), "Id");
 
             var claimsIdentity = new ClaimsIdentity(genericIdentity, claims);
 

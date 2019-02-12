@@ -1,9 +1,9 @@
-﻿using Marketplace.Domain.Entities;
+﻿using Marketplace.App.Handlers.Users;
 
 namespace Marketplace.App.Services.Jwt
 {
     public interface IJwtService
     {
-        object CreateJwt(User user);
+        object CreateJwt(AuthUserResponse userResponse);
     }
 }
