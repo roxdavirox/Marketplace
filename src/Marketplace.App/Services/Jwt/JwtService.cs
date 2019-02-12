@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Marketplace.Domain.Entities;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
-using Marketplace.Domain.Entities;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 
 namespace Marketplace.App.Services.Jwt
 {
