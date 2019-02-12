@@ -1,7 +1,5 @@
 ﻿using Marketplace.App.Handlers.Users;
-using Marketplace.Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -51,7 +49,7 @@ namespace Marketplace.App.Services.Jwt
         {
             var jtiClaim = new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString());
 
-            var userClaim = new Claim("user", JsonConvert.SerializeObject(authUser));
+            var userClaim = new Claim("user", authUser.ToJson());
 
             var claims = new[] { jtiClaim, userClaim };
 
