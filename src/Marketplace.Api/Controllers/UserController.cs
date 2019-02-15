@@ -1,7 +1,7 @@
 ﻿using Marketplace.App.Handlers.Users;
-using Marketplace.App.Notifications;
 using Marketplace.App.Services.Jwt;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -12,23 +12,18 @@ namespace Marketplace.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IJwtService _jwtService;
-        private readonly NotificationContext _notifications;
 
-        public UserController(
-            IMediator mediator, 
-            IJwtService jwtService, 
-            NotificationContext notifications)
+        public UserController(IMediator mediator, IJwtService jwtService)
         {
             _mediator = mediator;
             _jwtService = jwtService;
-            _notifications = notifications;
         }
 
-        [HttpPost("api/users/register")]
+        [HttpPost("api/users/register"), Authorize(Roles = "Adm")]
         public async Task<CreateUserResponse> Post(CreateUserRequest request) =>
             await _mediator.Send(request);
 
-        [HttpPost("api/users/login")]
+        [HttpPost("api/users/login"), AllowAnonymous]
         public async Task<object> Post(AuthUserRequest request)
         {
             var authResponse = await _mediator.Send(request);
