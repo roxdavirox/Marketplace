@@ -10,21 +10,15 @@ namespace Marketplace.App.Handlers.Users
         public string UserName { get; set; }
 
         public static explicit operator AuthUserResponse(User u) =>
-            new AuthUserResponse
-            {
+            new AuthUserResponse {
                 IdUser = u.Id,
                 UserName = u.Name
             };
-    }
 
-    public static class _AuthResponse
-    {
-        public static string ToJson(this AuthUserResponse authUser) =>
-           JsonConvert.SerializeObject(
-                new
-                {
-                    userId = authUser.IdUser,
-                    userName = authUser.UserName
+        public override string ToString() =>
+            JsonConvert.SerializeObject(new {
+                    userId = this.IdUser,
+                    userName = this.UserName
                 });
     }
 }

@@ -49,11 +49,12 @@ namespace Marketplace.App.Services.Jwt
         {
             var jtiClaim = new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString());
 
-            var userClaim = new Claim("user", authUser.ToJson());
+            var userClaim = new Claim("user", authUser.ToString());
+            var admRole = new Claim("role", "Adm");
 
-            var claims = new[] { jtiClaim, userClaim };
+            var claims = new[] { jtiClaim, userClaim, admRole };
 
-            var genericIdentity = new GenericIdentity(authUser.ToString(), "Id");
+            var genericIdentity = new GenericIdentity(authUser.IdUser.ToString(), "Id");
 
             var claimsIdentity = new ClaimsIdentity(genericIdentity, claims);
 

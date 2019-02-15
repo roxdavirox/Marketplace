@@ -7,12 +7,17 @@ using Marketplace.Infra.Data.Repositories;
 using Marketplace.Infra.IoC.Containers;
 using Marketplace.Infra.Transactions;
 using Marketplace.Shared;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 
 namespace Marketplace.Api
 {
@@ -30,7 +35,17 @@ namespace Marketplace.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.Filters.Add<AsyncFilterResult>())
+            Action<MvcOptions> mvcOptions = setup => {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+
+                setup.Filters.Add(new AuthorizeFilter(policy));
+
+                setup.Filters.Add<AsyncFilterResult>();
+            };
+
+            services.AddMvc(mvcOptions)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMediatRDependencyHandlers();
@@ -43,6 +58,28 @@ namespace Marketplace.Api
 
             services.AddSingleton<JwtSettings>();
             services.AddScoped<IJwtService, JwtService>();
+
+            var jwtSettings = services
+                .BuildServiceProvider()
+                .GetRequiredService<JwtSettings>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateActor = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidAudience = jwtSettings.Audience,
+                        IssuerSigningKey = jwtSettings.SigningCredentials.Key
+                    };
+                });
+
+            services.AddAuthorization();
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
@@ -87,6 +124,8 @@ namespace Marketplace.Api
                 policy.AllowAnyMethod();
                 policy.AllowAnyOrigin();
             });
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }
