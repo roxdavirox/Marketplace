@@ -1,11 +1,12 @@
 ﻿using Marketplace.App.Handlers.Products;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Marketplace.Api.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize(Roles = "Adm")]
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;

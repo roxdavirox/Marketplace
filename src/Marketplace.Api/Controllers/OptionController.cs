@@ -1,12 +1,13 @@
 ﻿using Marketplace.App.Handlers.Options;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace Marketplace.Api.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize(Roles = "Adm")]
     public class OptionController : ControllerBase
     {
         private readonly IMediator _mediator;
