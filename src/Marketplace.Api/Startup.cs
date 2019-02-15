@@ -36,11 +36,11 @@ namespace Marketplace.Api
         public void ConfigureServices(IServiceCollection services)
         {
             Action<MvcOptions> mvcOptions = setup => {
-                var policy = new AuthorizationPolicyBuilder()
+                var authRequiredPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
 
-                setup.Filters.Add(new AuthorizeFilter(policy));
+                setup.Filters.Add(new AuthorizeFilter(authRequiredPolicy));
 
                 setup.Filters.Add<AsyncFilterResult>();
             };
