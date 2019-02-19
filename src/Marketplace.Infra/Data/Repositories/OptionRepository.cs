@@ -2,6 +2,7 @@
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Marketplace.Infra.Data.Repositories
@@ -20,6 +21,9 @@ namespace Marketplace.Infra.Data.Repositories
             await _context.Options.AddAsync(option);
             return option;
         }
+
+        public async Task CreateRangeAsync(IEnumerable<Option> options) =>
+            await _context.Options.AddRangeAsync(options);
 
         public async Task<Option> GetByIdAsync(Guid idOption)
         {

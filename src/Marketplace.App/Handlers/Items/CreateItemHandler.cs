@@ -67,7 +67,7 @@ namespace Marketplace.App.Handlers.Items
 
             await _itemRepository.CreateAsync(item);
 
-            await _priceRepository.CreateAsync(prices);
+            await _priceRepository.CreateRangeAsync(prices);
 
             return (CreateItemResponse)item;
         }

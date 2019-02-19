@@ -30,9 +30,10 @@ namespace Marketplace.Domain.Entities
         public decimal Value { get; private set; }
         public PriceRange PriceRange { get; private set; }
 
-        public void AssociateWith(PriceRange priceRange)
+        public Price AssociateWith(PriceRange priceRange)
         {
             PriceRange = priceRange;
+            return this;
         }
     }
 }
