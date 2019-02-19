@@ -29,5 +29,10 @@ namespace Marketplace.Domain.Entities
         {
             Product = product;
         }
+
+        public Option AddItems(IEnumerable<Item> items) {
+            Items = items;
+            return this;
+        }
     }
 }
