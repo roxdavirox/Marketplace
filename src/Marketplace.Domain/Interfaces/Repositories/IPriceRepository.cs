@@ -6,6 +6,6 @@ namespace Marketplace.Domain.Interfaces.Repositories
 {
     public interface IPriceRepository
     {
-        Task CreateAsync(IEnumerable<Price> prices);
+        Task CreateRangeAsync(IEnumerable<Price> prices);
     }
 }
