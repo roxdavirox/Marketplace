@@ -1,9 +1,12 @@
 using MediatR;
 using System.Collections.Generic;
+using Marketplace.Domain.Entities;
+using static Marketplace.App.Handlers.Products.CreateFullProductRequest;
 
 namespace Marketplace.App.Handlers.Products
 {
-    public class CreateFullProductRequest : IRequest<CreateFullProductResponse>
+    public class CreateFullProductRequest : 
+        IRequest<CreateFullProductResponse>
     {
         public string Name { get; set; }
         public IEnumerable<CreateFullProductRequest_Option> Options { get; set; }
@@ -23,5 +26,5 @@ namespace Marketplace.App.Handlers.Products
                 }
             }
         }
-    }
+    }    
 }
