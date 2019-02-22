@@ -2,13 +2,19 @@ using Marketplace.App.Notifications;
 using Marketplace.Domain.Entities;
 using Marketplace.Domain.Interfaces.Repositories;
 using MediatR;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static Marketplace.App.Handlers.Products.CreateFullProductRequest;
+using static Marketplace.App.Handlers.Products.CreateFullProductRequest.CreateFullProductRequest_Option;
+using static Marketplace.App.Handlers.Products.CreateFullProductRequest.CreateFullProductRequest_Option.CreateFullProductRequest_Item;
 
 namespace Marketplace.App.Handlers.Products
 {
-    public class CreateFullProductHandler : IRequestHandler<CreateFullProductRequest, CreateFullProductResponse>
+    public class CreateFullProductHandler : 
+        IRequestHandler<CreateFullProductRequest, CreateFullProductResponse>
     {
         private readonly NotificationContext _notificationContext;
         private readonly IProductRepository _productRepository;
@@ -53,10 +59,7 @@ namespace Marketplace.App.Handlers.Products
                 return null;
             }
 
-            var options = request
-               .Options
-               .Select(o => CreateOptionChilds(o).Result)
-               .ToList();
+            var options = SelectProductOptions(request.Options);
 
             var invalidOptions = options.Any(o => o.Invalid);
 
@@ -70,26 +73,33 @@ namespace Marketplace.App.Handlers.Products
 
             await _optionRepository.CreateRangeAsync(options);
 
-            return (CreateFullProductResponse)product;
+            return (CreateFullProductResponse) product;
         }
 
-        private async Task<Option> CreateOptionChilds(
+        private IEnumerable<Option> SelectProductOptions(
+            IEnumerable<CreateFullProductRequest_Option> ops) {
+                var options = ops.Select(SelectProductOption)
+                    .Select(o => o.Result)
+                    .ToList();
+
+                return options;
+            }
+
+
+        private IEnumerable<Item> SelectOptionItems(
+            IEnumerable<CreateFullProductRequest_Item> items) {
+                var _items = items.Select(SelectOptionItem)
+                    .Select(i => i.Result)
+                    .ToList();
+
+                return _items;
+        }
+
+        private async Task<Option> SelectProductOption(
             CreateFullProductRequest.CreateFullProductRequest_Option o
             )
         {
-            var priceRange = new PriceRange();
-
-            if (priceRange.Invalid)
-            {
-                _notificationContext.AddNotifications(priceRange.ValidationResult);
-                return null;
-            }
-
-            await _priceRangeRepository.CreateAsync(priceRange);
-
-            var items = o.Items
-                .Select(i => CreateItemChilds(i, priceRange).Result)
-                .ToList();
+            var items = SelectOptionItems(o.Items);
 
             var invalidItems = items.Any(i => i.Invalid);
 
@@ -103,25 +113,47 @@ namespace Marketplace.App.Handlers.Products
 
             var option = new Option(o.Name).AddItems(items);
 
-            if (option.Invalid)
-            {
-                _notificationContext.AddNotifications(option.ValidationResult);
-                return null;
-            }
-
             return option;
         }
 
-        private async Task<Item> CreateItemChilds(
-            CreateFullProductRequest.CreateFullProductRequest_Option.CreateFullProductRequest_Item i,
-            PriceRange pr
+        private async Task<PriceRange> GetPriceRangeAsync() {
+            var priceRange = new PriceRange();
+
+            if (priceRange.Invalid)
+            {
+                _notificationContext.AddNotifications(priceRange.ValidationResult);
+                return null;
+            }
+
+            await _priceRangeRepository.CreateAsync(priceRange);
+
+            return priceRange;
+        }
+
+
+        private Price SelectItemPrice(
+            CreateFullProductRequest_Price p, PriceRange pr) {
+                var price = new Price(p.Start, p.End, p.Value)
+                    .AssociateWith(pr);
+
+                return price;
+        }
+
+        private IEnumerable<Price> SelectItemPrices(
+            IEnumerable<CreateFullProductRequest_Price> prices,
+            PriceRange pr) {
+                var _prices = prices.Select(p => SelectItemPrice(p, pr));
+
+                return _prices;
+            }
+
+        private async Task<Item> SelectOptionItem(
+            CreateFullProductRequest_Item i
             )
         {
-            var prices = i.Prices
-                .Select(
-                    p => new Price(p.Start, p.End, p.Value).AssociateWith(pr)
-                )
-                .ToList();
+            var priceRange = await GetPriceRangeAsync();
+
+            var prices = SelectItemPrices(i.Prices, priceRange);
 
             var invalidPrices = prices.Any(p => p.Invalid);
             
@@ -133,9 +165,8 @@ namespace Marketplace.App.Handlers.Products
 
             await _priceRepository.CreateRangeAsync(prices);
 
-            var item = new Item(i.Name, pr);
-
-            return item;
+            return new Item(i.Name, priceRange);
         }
     }
+
 }
