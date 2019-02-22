@@ -31,12 +31,12 @@ namespace Marketplace.Domain.Entities
         public PriceRange PriceRange { get; private set; }
         public virtual Option Option { get; set; }
 
-        public void AssociateWith(Option option)
+        public void HasOne(Option option)
         {
             Option = option;
         }
 
-        public void AssociateWith(PriceRange priceRange)
+        public void HasOne(PriceRange priceRange)
         {
             PriceRange = priceRange;
         }
