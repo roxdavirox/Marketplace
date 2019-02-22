@@ -1,5 +1,6 @@
 ﻿using Marketplace.App.Notifications;
 using Marketplace.Domain.Entities;
+using Marketplace.Shared.Extensions;
 using Marketplace.Domain.Interfaces.Repositories;
 using MediatR;
 using System.Linq;

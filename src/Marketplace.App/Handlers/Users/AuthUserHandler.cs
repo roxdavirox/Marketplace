@@ -1,4 +1,4 @@
-﻿using Marketplace.App.Extensions;
+﻿using Marketplace.Shared.Extensions;
 using Marketplace.App.Notifications;
 using Marketplace.App.Services.Jwt;
 using Marketplace.Domain.Interfaces.Repositories;

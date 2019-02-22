@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using Marketplace.Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,12 +41,5 @@ namespace Marketplace.App.Notifications
         }
     }
 
-    internal static class NotificationContextExtensions
-    {
-        internal static void ForEach<T>(this IEnumerable<T> elements, Action<T> callbackAction)
-        {
-            foreach (var element in elements)
-                callbackAction?.Invoke(element);
-        }
-    }
+
 }

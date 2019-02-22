@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Marketplace.App.Extensions
+namespace Marketplace.Shared.Extensions
 {
     public static class StringExtensions
     {
