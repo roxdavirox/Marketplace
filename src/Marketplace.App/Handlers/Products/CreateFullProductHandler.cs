@@ -69,7 +69,7 @@ namespace Marketplace.App.Handlers.Products
                 return null;
             }
 
-            options.ForEach(o => o.AssociateWith(product));
+            options.ForEach(o => o.HasOne(product));
 
             await _optionRepository.CreateRangeAsync(options);
 
@@ -104,7 +104,7 @@ namespace Marketplace.App.Handlers.Products
 
             await _itemRepository.CreateRangeAsync(items);
 
-            return new Option(option.Name).AddItems(items);
+            return new Option(option.Name).HasMany(items);
         }
 
         private async Task<PriceRange> GetPriceRangeAsync() {

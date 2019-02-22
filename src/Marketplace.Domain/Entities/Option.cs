@@ -25,12 +25,12 @@ namespace Marketplace.Domain.Entities
         public IEnumerable<Item> Items { get; set; }
         public virtual Product Product { get; set; }
 
-        public void AssociateWith(Product product)
+        public void HasOne(Product product)
         {
             Product = product;
         }
 
-        public Option AddItems(IEnumerable<Item> items) {
+        public Option HasMany(IEnumerable<Item> items) {
             Items = items;
             return this;
         }

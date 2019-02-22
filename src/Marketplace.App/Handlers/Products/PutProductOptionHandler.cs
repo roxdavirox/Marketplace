@@ -41,7 +41,7 @@ namespace Marketplace.App.Handlers.Products
                 return null;
             }
 
-            option.AssociateWith(product);
+            option.HasOne(product);
 
             return new PutProductOptionResponse(product, option);
         }
