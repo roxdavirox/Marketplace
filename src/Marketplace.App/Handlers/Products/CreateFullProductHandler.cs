@@ -85,16 +85,16 @@ namespace Marketplace.App.Handlers.Products
         private IEnumerable<Item> SelectOptionItems(
             IEnumerable<CreateFullProductRequest_Item> items) =>
                 items.Select(SelectOptionItem)
-                    .Select(i => i.Result)
+                    .Select(item => item.Result)
                     .ToList();
 
         private async Task<Option> SelectProductOption(
-            CreateFullProductRequest.CreateFullProductRequest_Option o
+            CreateFullProductRequest_Option option
             )
         {
-            var items = SelectOptionItems(o.Items);
+            var items = SelectOptionItems(option.Items);
 
-            var invalidItems = items.Any(i => i.Invalid);
+            var invalidItems = items.Any(item => item.Invalid);
 
             if (invalidItems)
             {
@@ -104,9 +104,7 @@ namespace Marketplace.App.Handlers.Products
 
             await _itemRepository.CreateRangeAsync(items);
 
-            var option = new Option(o.Name).AddItems(items);
-
-            return option;
+            return new Option(option.Name).AddItems(items);
         }
 
         private async Task<PriceRange> GetPriceRangeAsync() {
@@ -124,20 +122,20 @@ namespace Marketplace.App.Handlers.Products
         }
 
         private Price SelectItemPrice(
-            CreateFullProductRequest_Price p, PriceRange pr) =>
-                new Price(p.Start, p.End, p.Value)
-                    .AssociateWith(pr);
+            CreateFullProductRequest_Price price, PriceRange priceRange) =>
+                new Price(price.Start, price.End, price.Value)
+                    .AssociateWith(priceRange);
 
         private IEnumerable<Price> SelectItemPrices(
-            IEnumerable<CreateFullProductRequest_Price> prices, PriceRange pr) => 
-                prices.Select(p => SelectItemPrice(p, pr));
+            IEnumerable<CreateFullProductRequest_Price> prices, PriceRange priceRange) => 
+                prices.Select(p => SelectItemPrice(p, priceRange));
         private async Task<Item> SelectOptionItem(
-            CreateFullProductRequest_Item i
+            CreateFullProductRequest_Item item
             )
         {
             var priceRange = await GetPriceRangeAsync();
 
-            var prices = SelectItemPrices(i.Prices, priceRange);
+            var prices = SelectItemPrices(item.Prices, priceRange);
 
             var invalidPrices = prices.Any(p => p.Invalid);
             
@@ -149,7 +147,7 @@ namespace Marketplace.App.Handlers.Products
 
             await _priceRepository.CreateRangeAsync(prices);
 
-            return new Item(i.Name, priceRange);
+            return new Item(item.Name, priceRange);
         }
     }
 
