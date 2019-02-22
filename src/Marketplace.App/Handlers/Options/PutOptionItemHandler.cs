@@ -40,7 +40,7 @@ namespace Marketplace.App.Handlers.Options
                 return null;
             }
 
-            item.AssociateWith(option);
+            item.HasOne(option);
 
             return new PutOptionItemResponse(item, option);
         }
