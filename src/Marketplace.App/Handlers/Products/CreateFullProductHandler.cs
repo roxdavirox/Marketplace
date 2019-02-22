@@ -77,23 +77,16 @@ namespace Marketplace.App.Handlers.Products
         }
 
         private IEnumerable<Option> SelectProductOptions(
-            IEnumerable<CreateFullProductRequest_Option> ops) {
-                var options = ops.Select(SelectProductOption)
+            IEnumerable<CreateFullProductRequest_Option> options) =>
+                options.Select(SelectProductOption)
                     .Select(o => o.Result)
                     .ToList();
 
-                return options;
-            }
-
-
         private IEnumerable<Item> SelectOptionItems(
-            IEnumerable<CreateFullProductRequest_Item> items) {
-                var _items = items.Select(SelectOptionItem)
+            IEnumerable<CreateFullProductRequest_Item> items) =>
+                items.Select(SelectOptionItem)
                     .Select(i => i.Result)
                     .ToList();
-
-                return _items;
-        }
 
         private async Task<Option> SelectProductOption(
             CreateFullProductRequest.CreateFullProductRequest_Option o
@@ -130,23 +123,14 @@ namespace Marketplace.App.Handlers.Products
             return priceRange;
         }
 
-
         private Price SelectItemPrice(
-            CreateFullProductRequest_Price p, PriceRange pr) {
-                var price = new Price(p.Start, p.End, p.Value)
+            CreateFullProductRequest_Price p, PriceRange pr) =>
+                new Price(p.Start, p.End, p.Value)
                     .AssociateWith(pr);
 
-                return price;
-        }
-
         private IEnumerable<Price> SelectItemPrices(
-            IEnumerable<CreateFullProductRequest_Price> prices,
-            PriceRange pr) {
-                var _prices = prices.Select(p => SelectItemPrice(p, pr));
-
-                return _prices;
-            }
-
+            IEnumerable<CreateFullProductRequest_Price> prices, PriceRange pr) => 
+                prices.Select(p => SelectItemPrice(p, pr));
         private async Task<Item> SelectOptionItem(
             CreateFullProductRequest_Item i
             )
