@@ -51,7 +51,7 @@ namespace Marketplace.App.Handlers.Items
                 .Select(p => new Price(p.Start, p.End, p.Value))
                 .ToList();
 
-            prices.ForEach(p => p.AssociateWith(priceRange));
+            prices.ForEach(p => p.HasOne(priceRange));
 
             var invalidPrices = prices.Where(p => p.Invalid);
 
