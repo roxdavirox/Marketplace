@@ -124,7 +124,7 @@ namespace Marketplace.App.Handlers.Products
         private Price SelectItemPrice(
             CreateFullProductRequest_Price price, PriceRange priceRange) =>
                 new Price(price.Start, price.End, price.Value)
-                    .AssociateWith(priceRange);
+                    .HasOne(priceRange);
 
         private IEnumerable<Price> SelectItemPrices(
             IEnumerable<CreateFullProductRequest_Price> prices, PriceRange priceRange) => 
