@@ -42,7 +42,7 @@ namespace Marketplace.App.Handlers.Options
                 return null;
             }
 
-            item.AssociateWith(option);
+            item.HasOne(option);
 
             await _optionRepository.CreateAsync(option);
 

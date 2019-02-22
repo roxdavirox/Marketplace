@@ -39,7 +39,7 @@ namespace Marketplace.App.Handlers.Items
             }
 
             var item = new Item(request.Name);
-            item.AssociateWith(priceRange);
+            item.HasOne(priceRange);
 
             if (item.Invalid)
             {
