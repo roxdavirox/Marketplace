@@ -1,8 +1,10 @@
 ﻿using Marketplace.Domain.Entities;
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Marketplace.Infra.Data.Repositories
@@ -30,5 +32,8 @@ namespace Marketplace.Infra.Data.Repositories
             var option = await _context.Options.FindAsync(idOption);
             return option;
         }
+
+        public async Task<IEnumerable<Option>> GetAllAsync() => 
+            await _context.Options.ToListAsync();
     }
 }

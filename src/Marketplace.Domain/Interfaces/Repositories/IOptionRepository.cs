@@ -9,6 +9,7 @@ namespace Marketplace.Domain.Interfaces.Repositories
     {
         Task<Option> CreateAsync(Option option);
         Task CreateRangeAsync(IEnumerable<Option> options);
+        Task<IEnumerable<Option>> GetAllAsync();
         Task<Option> GetByIdAsync(Guid idOption);
     }
 }

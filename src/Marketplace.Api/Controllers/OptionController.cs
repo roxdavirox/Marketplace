@@ -41,6 +41,9 @@ namespace Marketplace.Api.Controllers
 
             return response;
         }
-        
+
+        [HttpGet("api/options"), AllowAnonymous]
+        public async Task<GetAllOptionsResponse> GetAll() =>
+            await _mediator.Send(new GetAllOptionsRequest());
     }
 }
