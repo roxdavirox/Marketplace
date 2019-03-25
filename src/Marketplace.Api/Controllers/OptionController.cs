@@ -24,7 +24,7 @@ namespace Marketplace.Api.Controllers
             return await _mediator.Send(command);
         }
 
-        [HttpPost("api/Options")]
+        [HttpPost("api/Options"), AllowAnonymous]
         public async Task<CreateOptionResponse> Post(CreateOptionRequest request) =>
             await _mediator.Send(request);
 
