@@ -37,13 +37,18 @@ namespace Marketplace.Api.Controllers
         {
             var command = new CreateOptionItemRequest(request, idItem);
 
-            var response =  await _mediator.Send(command);
+            var response = await _mediator.Send(command);
 
             return response;
         }
 
-        [HttpGet("api/options"), AllowAnonymous]
+        [HttpGet("api/Options"), AllowAnonymous]
         public async Task<GetAllOptionsResponse> GetAll() =>
             await _mediator.Send(new GetAllOptionsRequest());
+
+        [HttpDelete("api/Options"), AllowAnonymous]
+        public async Task<DeleteMultiplesOptionsResponse> DeleteMultiples(
+                DeleteMultiplesOptionsRequest request
+            ) => await _mediator.Send(request);
     }
 }

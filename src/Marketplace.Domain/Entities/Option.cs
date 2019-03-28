@@ -34,5 +34,7 @@ namespace Marketplace.Domain.Entities
             Items = items;
             return this;
         }
+
+        public void RemoveItems() => Items = null;
     }
 }

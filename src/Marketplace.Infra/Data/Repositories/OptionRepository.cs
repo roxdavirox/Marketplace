@@ -27,6 +27,22 @@ namespace Marketplace.Infra.Data.Repositories
         public async Task CreateRangeAsync(IEnumerable<Option> options) =>
             await _context.Options.AddRangeAsync(options);
 
+        public async Task<IEnumerable<Option>> GetByIdsAsync(IEnumerable<Guid> optionsIds)
+        {
+            var options = _context.Options.Where(o => optionsIds.Contains(o.Id));
+
+            return await options.ToListAsync();
+        }
+
+        public async Task<int> RemoveRange(IEnumerable<Option> options)
+        {
+            _context.Options.RemoveRange(options);
+
+            var deletedOptions = options.Count();
+
+            return await Task.FromResult<int>(deletedOptions);
+        }
+            
         public async Task<Option> GetByIdAsync(Guid idOption)
         {
             var option = await _context.Options.FindAsync(idOption);
