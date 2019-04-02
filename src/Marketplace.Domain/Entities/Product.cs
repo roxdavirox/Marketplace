@@ -1,6 +1,5 @@
 ﻿using Marketplace.Domain.Entities.Base;
 using Marketplace.Domain.Validators;
-using System.Collections.Generic;
 
 namespace Marketplace.Domain.Entities
 {
@@ -13,7 +12,9 @@ namespace Marketplace.Domain.Entities
             Validate(this, new ProductValidator());
         }
 
+        public void HasOne(Option option) => Option = option;
+
         public string Name { get; private set; }
-        public IEnumerable<Option> Options { get; set; }
+        public Option Option { get; set; }
     }
 }
