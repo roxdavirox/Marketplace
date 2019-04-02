@@ -17,11 +17,11 @@ namespace Marketplace.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("api/Items")]
+        [HttpPost("api/Items"), AllowAnonymous]
         public async Task<CreateItemResponse> Post(CreateItemRequest request) =>
             await _mediator.Send(request);
 
-        [HttpPost("api/Options/{idOption}/Items")]
+        [HttpPost("api/Options/{idOption}/Items"), AllowAnonymous]
         public async Task<CreateItemResponse> Post(CreateItemOptionRequest request, Guid idOption)
         {
             var command = new CreateItemOptionRequest(request, idOption);
