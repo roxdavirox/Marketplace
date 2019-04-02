@@ -55,6 +55,8 @@ namespace Marketplace.App.Handlers.Items
 
             var emptyPrice = new Price(1, 1, 1);
 
+            emptyPrice.HasOne(priceRange);
+
             if(emptyPrice.Invalid)
             {
                 _notificationContext.AddNotifications(emptyPrice.ValidationResult);
