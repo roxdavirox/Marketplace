@@ -20,10 +20,6 @@ namespace Marketplace.Api.Controllers
         public async Task<CreateProductResponse> Post(CreateProductRequest request) =>
             await _mediator.Send(request);
 
-        [HttpPost("api/products/full"), AllowAnonymous]
-        public async Task<CreateFullProductResponse> Post(CreateFullProductRequest request) =>
-            await _mediator.Send(request);
-
         [HttpPut("api/Products/Options")]
         public async Task<PutProductOptionResponse> Put(PutProductOptionRequest request) =>
             await _mediator.Send(request);
