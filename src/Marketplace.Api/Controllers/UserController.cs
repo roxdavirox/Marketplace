@@ -19,7 +19,7 @@ namespace Marketplace.Api.Controllers
             _jwtService = jwtService;
         }
 
-        [HttpPost("api/users/register"), Authorize(Roles = "Adm")]
+        [HttpPost("api/users/register"), Authorize(Roles = "Adm"), AllowAnonymous]
         public async Task<CreateUserResponse> Post(CreateUserRequest request) =>
             await _mediator.Send(request);
 

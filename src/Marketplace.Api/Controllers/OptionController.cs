@@ -17,7 +17,7 @@ namespace Marketplace.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("api/Products/{idProduct:Guid}/Options")]
+        [HttpPost("api/Products/{idProduct:Guid}/Options"), AllowAnonymous]
         public async Task<CreateOptionResponse> Post(CreateOptionProductRequest request, Guid idProduct)
         {
             var command = new CreateOptionProductRequest(request, idProduct);
@@ -32,7 +32,7 @@ namespace Marketplace.Api.Controllers
         public async Task<PutOptionItemResponse> Put(PutOptionItemRequest request) =>
             await _mediator.Send(request);
 
-        [HttpPost("api/Items/{idItem:Guid}/Options")]
+        [HttpPost("api/Items/{idItem:Guid}/Options"), AllowAnonymous]
         public async Task<CreateOptionItemResponse> Post(CreateOptionItemRequest request, Guid idItem)
         {
             var command = new CreateOptionItemRequest(request, idItem);
