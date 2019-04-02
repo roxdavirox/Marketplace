@@ -34,13 +34,15 @@ namespace Marketplace.App.Handlers.Options
                 return null;
             }
 
-            var option = new Option(request.Name, product);
+            var option = new Option(request.Name);
 
             if(option.Invalid)
             {
                 _notificationContext.AddNotifications(option.ValidationResult);
                 return null;
             }
+
+            product.HasOne(option);
 
             await _optionRepository.CreateAsync(option);
 
