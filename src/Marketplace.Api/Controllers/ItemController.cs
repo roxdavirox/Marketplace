@@ -28,5 +28,9 @@ namespace Marketplace.Api.Controllers
             var response = await _mediator.Send(command);
             return response;
         }
+
+        [HttpGet("api/Items/{idOption}"), AllowAnonymous]
+        public async Task<GetItemsByOptionIdResponse> GetByOptionId(Guid idOption) =>
+            await _mediator.Send( new GetItemsByOptionIdRequest(idOption));
     }
 }
