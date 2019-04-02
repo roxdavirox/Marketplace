@@ -11,10 +11,6 @@ namespace Marketplace.Infra.Data.EF.Maps
             builder.HasKey(p => p.Id);
 
             builder.ToTable(nameof(Option));
-
-            builder.HasOne(p => p.Product)
-                .WithMany(p => p.Options)
-                .HasForeignKey("IdProduct");
         }
     }
 }

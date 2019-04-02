@@ -10,6 +10,11 @@ namespace Marketplace.Infra.Data.EF.Maps
         {
             builder.HasKey(p => p.Id);
             builder.ToTable(nameof(Product));
+
+            builder.HasOne(_ => _.Option)
+                .WithMany(_ => _.Products)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasForeignKey("IdOption");
         }
     }
 }
