@@ -34,7 +34,7 @@ namespace Marketplace.Api.Controllers
             await _mediator.Send( new GetItemsByOptionIdRequest(idOption));
 
         [HttpDelete("api/Items"), AllowAnonymous]
-        public async Task<DeleteMultipleItemsResponse> DeleteMultiples(
+        public async Task<DeleteMultiplesItemsResponse> DeleteMultiples(
                 DeleteMultiplesItemsRequest request
             ) => await _mediator.Send(request);
     }
