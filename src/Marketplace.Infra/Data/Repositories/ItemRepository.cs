@@ -24,6 +24,13 @@ namespace Marketplace.Infra.Data.Repositories
             return item;
         }
 
+        public async Task<IEnumerable<Item>> GetByIdsAsync(IEnumerable<Guid> itemsIds)
+        {
+            var items = _context.Items.Where(i => itemsIds.Contains(i.Id));
+
+            return await items.ToListAsync();
+        }
+
         public async Task<IEnumerable<Item>> GetByOptionIdAsync(Guid idOption)
         {
             var option = await _context.Options
@@ -38,5 +45,14 @@ namespace Marketplace.Infra.Data.Repositories
 
         public async Task<Item> GetByIdAsync(Guid idItem) =>
             await _context.Items.FindAsync(idItem);
+
+        public async Task<int> RemoveRange(IEnumerable<Item> items)
+        {
+            _context.Items.RemoveRange(items);
+
+            var deletedItems = items.Count();
+
+            return await Task.FromResult<int>(deletedItems);
+        }
     }
 }
