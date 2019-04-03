@@ -32,5 +32,10 @@ namespace Marketplace.Api.Controllers
         [HttpGet("api/Items/{idOption}"), AllowAnonymous]
         public async Task<GetItemsByOptionIdResponse> GetByOptionId(Guid idOption) =>
             await _mediator.Send( new GetItemsByOptionIdRequest(idOption));
+
+        [HttpDelete("api/Items"), AllowAnonymous]
+        public async Task<DeleteMultipleItemsResponse> DeleteMultiples(
+                DeleteMultiplesItemsRequest request
+            ) => await _mediator.Send(request);
     }
 }
