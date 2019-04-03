@@ -10,6 +10,7 @@ namespace Marketplace.Domain.Interfaces.Repositories
         Task<Item> CreateAsync(Item item);
         Task CreateRangeAsync(IEnumerable<Item> items);
         Task<Item> GetByIdAsync(Guid IdItem);
+        Task<IEnumerable<Item>> GetByIdsAsync(IEnumerable<Guid> itemsIds);
         Task<IEnumerable<Item>> GetByOptionIdAsync(Guid idOption);
         Task<int> RemoveRange(IEnumerable<Item> items);
     }
