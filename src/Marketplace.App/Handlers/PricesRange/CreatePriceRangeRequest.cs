@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System.Collections.Generic;
 
 namespace Marketplace.App.Handlers.PricesRange
 {
