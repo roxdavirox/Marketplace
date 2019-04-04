@@ -8,12 +8,12 @@ namespace Marketplace.App.Handlers.Items
         public CreateItemOptionRequest(CreateItemOptionRequest request, Guid idOption)
         {
             IdOption = idOption;
-            Name = request.Name;
+            ItemName = request.ItemName;
         }
 
         public CreateItemOptionRequest() { }
 
         internal Guid IdOption { get; set; }
-        public string Name { get; set; }
+        public string ItemName { get; set; }
     }
 }
