@@ -29,7 +29,7 @@ namespace Marketplace.Infra.Data.Repositories
             await _context.Prices.AddRangeAsync(prices);
         }
 
-        public async Task<IEnumerable<Price>> GetPricesByPriceRangeId(Guid idPriceRange)
+        public async Task<IEnumerable<Price>> GetPricesByPriceRangeIdAsync(Guid idPriceRange)
         {
             var priceRange = await _context.PriceRange
                 .Include(_ => _.Prices)
