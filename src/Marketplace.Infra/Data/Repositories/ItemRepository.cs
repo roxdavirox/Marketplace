@@ -31,7 +31,7 @@ namespace Marketplace.Infra.Data.Repositories
             return await items.ToListAsync();
         }
 
-        public async Task<IEnumerable<Item>> GetByOptionIdAsync(Guid idOption)
+        public async Task<IEnumerable<Item>> GetItemsByOptionIdAsync(Guid idOption)
         {
             var option = await _context.Options
                 .Include(o => o.Items)

@@ -28,7 +28,7 @@ namespace Marketplace.App.Handlers.Items
                 return null;
             }
 
-            var items = await _itemRepository.GetByOptionIdAsync(request.IdOption);
+            var items = await _itemRepository.GetItemsByOptionIdAsync(request.IdOption);
 
             return new GetItemsByOptionIdResponse(items);
         }
