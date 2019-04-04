@@ -20,5 +20,9 @@ namespace Marketplace.Api.Controllers
         [HttpPost("api/Price/{idPriceRange:Guid}"), AllowAnonymous]
         public async Task<CreatePriceResponse> Post(CreatePriceRequest request, Guid idPriceRange) =>
             await _mediator.Send(new CreatePriceRequest(request, idPriceRange));
+
+        [HttpGet("api/Price/{idPriceRange:Guid}"), AllowAnonymous]
+        public async Task<GetPricesResponse> GetByPriceRangeId(Guid idPriceRange) =>
+            await _mediator.Send(new GetPricesRequest(idPriceRange));
     }
 }
