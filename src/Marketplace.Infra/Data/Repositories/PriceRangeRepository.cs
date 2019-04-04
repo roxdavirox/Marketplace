@@ -1,7 +1,9 @@
 ﻿using Marketplace.Domain.Entities;
 using Marketplace.Domain.Interfaces.Repositories;
 using Marketplace.Infra.Data.EF.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Marketplace.Infra.Data.Repositories
@@ -20,6 +22,9 @@ namespace Marketplace.Infra.Data.Repositories
             await _context.PriceRange.AddAsync(priceRange);
             return priceRange;
         }
+
+        public async Task<IEnumerable<PriceRange>> GetAllAsync() =>
+            await _context.PriceRange.ToListAsync();
 
         public async Task<PriceRange> GetByIdAsync(Guid idPriceRange) =>
             await _context.PriceRange.FindAsync(idPriceRange);
