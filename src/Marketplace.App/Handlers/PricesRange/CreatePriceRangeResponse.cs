@@ -5,14 +5,14 @@ namespace Marketplace.App.Handlers.PricesRange
 {
     public class CreatePriceRangeResponse
     {
-        public string Name { get; set; }
+        public string PriceRangeName { get; set; }
         public Guid IdPriceRange { get; set; }
 
         public static explicit operator CreatePriceRangeResponse(PriceRange pr) =>
             new CreatePriceRangeResponse
             {
                IdPriceRange = pr.Id,
-               Name = pr.Name
+               PriceRangeName = pr.Name
             };
     }
 }
