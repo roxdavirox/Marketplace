@@ -15,6 +15,12 @@ namespace Marketplace.Infra.Data.Repositories
             _context = context;
         }
 
+        public async Task<Price> CreateAsync(Price price)
+        {
+            await _context.Prices.AddAsync(price);
+            return price;
+        }
+
         public async Task CreateRangeAsync(IEnumerable<Price> prices)
         {
             await _context.Prices.AddRangeAsync(prices);
