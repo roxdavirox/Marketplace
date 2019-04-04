@@ -8,14 +8,16 @@ namespace Marketplace.Domain.Entities
     {
         public string Name { get; private set; }
 
-        public virtual ICollection<Item> Items { get; private set; }
-        public ICollection<Price> Prices { get; private set; }
-        
+        public virtual IEnumerable<Item> Items { get; private set; }
+        public IEnumerable<Price> Prices { get; private set; }
+
         public PriceRange(string name)
         {
             Name = name;
 
             Validate(this, new PriceRangeValidator());
         }
+
+        public void HasMany(IEnumerable<Price> prices) => Prices = prices;
     }
 }
