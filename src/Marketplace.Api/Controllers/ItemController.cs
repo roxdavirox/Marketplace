@@ -37,5 +37,9 @@ namespace Marketplace.Api.Controllers
         public async Task<DeleteMultiplesItemsResponse> DeleteMultiples(
                 DeleteMultiplesItemsRequest request
             ) => await _mediator.Send(request);
+
+        [HttpPut("api/Items"), AllowAnonymous]
+        public async Task<PutItemResponse> Put(PutItemRequest request) =>
+            await _mediator.Send(request);
     }
 }
