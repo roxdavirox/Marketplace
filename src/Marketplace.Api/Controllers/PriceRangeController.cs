@@ -19,5 +19,9 @@ namespace Marketplace.Api.Controllers
         [HttpPost("api/PriceRange"), AllowAnonymous]
         public async Task<CreatePriceRangeResponse> Post(CreatePriceRangeRequest request) =>
             await _mediator.Send(request);
+
+        [HttpGet("api/PriceRange"), AllowAnonymous]
+        public async Task<GetAllPricesRangeResponse> GetAll() =>
+            await _mediator.Send(new GetAllPricesRangeRequest());
     }
 }
