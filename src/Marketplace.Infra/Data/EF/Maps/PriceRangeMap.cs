@@ -11,6 +11,10 @@ namespace Marketplace.Infra.Data.EF.Maps
             builder.ToTable(nameof(PriceRange));
             builder.HasKey(_ => _.Id);
 
+            builder.Property(_ => _.Name)
+                .HasMaxLength(50)
+                .IsRequired();
+
         }
     }
 }
