@@ -1,4 +1,5 @@
 ﻿using Marketplace.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,5 +9,6 @@ namespace Marketplace.Domain.Interfaces.Repositories
     {
         Task CreateRangeAsync(IEnumerable<Price> prices);
         Task<Price> CreateAsync(Price price);
+        Task<IEnumerable<Price>> GetPricesByPriceRangeId(Guid idPriceRange);
     }
 }
