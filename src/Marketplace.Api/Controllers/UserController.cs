@@ -19,10 +19,21 @@ namespace Marketplace.Api.Controllers
             _jwtService = jwtService;
         }
 
+        /// <summary>
+        /// Cria um novo Usuario no sistema
+        /// </summary>
+        /// <param name="request">Request com Nome,Email e Senha</param>
+        /// <returns>Retorna o Nome e Id do Usuario criado</returns>
         [HttpPost("api/users/register"), Authorize(Roles = "Adm"), AllowAnonymous]
         public async Task<CreateUserResponse> Post(CreateUserRequest request) =>
             await _mediator.Send(request);
 
+        /// <summary>
+        /// Autentica um Usuario no sistema
+        /// </summary>
+        /// <param name="request">Request com Email e Senha do Usuario</param>
+        /// <returns>Retorna um JWT com os dados do usuario caso for autenticado, 
+        /// caso contrario retorna mensagens de erro</returns>
         [HttpPost("api/users/login"), AllowAnonymous]
         public async Task<object> Post(AuthUserRequest request)
         {
