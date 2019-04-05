@@ -17,10 +17,21 @@ namespace Marketplace.Api.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Cria uma Preço dentro de uma Tabela de Preço
+        /// </summary>
+        /// <param name="request"> Request com Inicio e Fim associado com um Valor entre o intervalo</param>
+        /// <param name="idPriceRange">Id da Tabela de Preço que o novo Preço será associado</param>
+        /// <returns>Retorna o Id do Preço e da Tabela de Preço</returns>
         [HttpPost("api/Price/{idPriceRange:Guid}"), AllowAnonymous]
         public async Task<CreatePriceResponse> Post(CreatePriceRequest request, Guid idPriceRange) =>
             await _mediator.Send(new CreatePriceRequest(request, idPriceRange));
 
+        /// <summary>
+        /// Obtem todos os Preços associados a uma Tabela de Preço
+        /// </summary>
+        /// <param name="idPriceRange">Id da Tabela de Preço que será usada para buscar os Preços</param>
+        /// <returns>Retorna Inicio,Fim e Valor do Preço</returns>
         [HttpGet("api/Price/{idPriceRange:Guid}"), AllowAnonymous]
         public async Task<GetPricesResponse> GetByPriceRangeId(Guid idPriceRange) =>
             await _mediator.Send(new GetPricesRequest(idPriceRange));
