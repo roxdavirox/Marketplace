@@ -4,6 +4,7 @@ using Marketplace.Infra.Data.EF.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Marketplace.Infra.Data.Repositories
@@ -28,5 +29,21 @@ namespace Marketplace.Infra.Data.Repositories
 
         public async Task<PriceRange> GetByIdAsync(Guid idPriceRange) =>
             await _context.PriceRange.FindAsync(idPriceRange);
+
+        public async Task<IEnumerable<PriceRange>> GetByIdsAsync(IEnumerable<Guid> pricesRangeIds)
+        {
+            var pricesRange = _context.PriceRange.Where(pr => pricesRangeIds.Contains(pr.Id));
+
+            return await pricesRange.ToListAsync();
+        }
+
+        public async Task<int> RemoveRangeAsync(IEnumerable<PriceRange> pricesRange)
+        {
+            _context.PriceRange.RemoveRange(pricesRange);
+
+            var deletedCount = pricesRange.Count();
+
+            return await Task.FromResult(deletedCount);
+        }
     }
 }
