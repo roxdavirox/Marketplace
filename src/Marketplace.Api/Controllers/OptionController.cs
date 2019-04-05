@@ -47,8 +47,8 @@ namespace Marketplace.Api.Controllers
             await _mediator.Send(new GetAllOptionsRequest());
 
         [HttpDelete("api/Options"), AllowAnonymous]
-        public async Task<DeleteMultiplesOptionsResponse> DeleteMultiples(
-                DeleteMultiplesOptionsRequest request
+        public async Task<DeleteOptionsResponse> DeleteMultiples(
+                DeleteOptionsRequest request
             ) => await _mediator.Send(request);
     }
 }

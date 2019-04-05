@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace Marketplace.App.Handlers.Options
 {
-    public class DeleteMultiplesOptionsHandler : IRequestHandler<DeleteMultiplesOptionsRequest, DeleteMultiplesOptionsResponse>
+    public class DeleteOptionsHandler : IRequestHandler<DeleteOptionsRequest, DeleteOptionsResponse>
     {
         private readonly IOptionRepository _optionRepository;
         private readonly NotificationContext _notificationConext;
 
-        public DeleteMultiplesOptionsHandler(
+        public DeleteOptionsHandler(
             IOptionRepository optionRepository, NotificationContext notificationConext)
         {
             _optionRepository = optionRepository;
             _notificationConext = notificationConext;
         }
 
-        public async Task<DeleteMultiplesOptionsResponse> Handle(
-            DeleteMultiplesOptionsRequest request, CancellationToken cancellationToken)
+        public async Task<DeleteOptionsResponse> Handle(
+            DeleteOptionsRequest request, CancellationToken cancellationToken)
         {
             if(request == null)
             {
@@ -47,7 +47,7 @@ namespace Marketplace.App.Handlers.Options
                 return null;
             }
 
-            return new DeleteMultiplesOptionsResponse(deletedOptionsCount);
+            return new DeleteOptionsResponse(deletedOptionsCount);
         }
     }
 }
