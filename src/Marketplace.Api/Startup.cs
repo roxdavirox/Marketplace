@@ -18,6 +18,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace Marketplace.Api
 {
@@ -35,7 +37,8 @@ namespace Marketplace.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Action<MvcOptions> mvcOptions = setup => {
+            Action<MvcOptions> mvcOptions = setup =>
+            {
                 var authRequiredPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
@@ -89,7 +92,13 @@ namespace Marketplace.Api
             services.AddTransient<IPriceRangeRepository, PriceRangeRepository>();
 
             services.AddSwaggerGen(c =>
-               c.SwaggerDoc("v1", new Info { Title = $"Marketplace API", Version = "v1" })
+            {
+                c.SwaggerDoc("v1", new Info { Title = $"Marketplace API", Version = "v1" });
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            }
            );
 
             services.AddCors();
@@ -107,7 +116,7 @@ namespace Marketplace.Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseStaticFiles();
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
