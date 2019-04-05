@@ -10,5 +10,7 @@ namespace Marketplace.Domain.Interfaces.Repositories
         Task<PriceRange> CreateAsync(PriceRange priceRange);
         Task<PriceRange> GetByIdAsync(Guid idPriceRange);
         Task<IEnumerable<PriceRange>> GetAllAsync();
+        Task<IEnumerable<PriceRange>> GetByIdsAsync(IEnumerable<Guid> pricesRangeIds);
+        Task<int> RemoveRangeAsync(IEnumerable<PriceRange> pricesRange);
     }
 }
