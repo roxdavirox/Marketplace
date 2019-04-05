@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Marketplace.App.Handlers.Options
 {
-    public class DeleteMultiplesOptionsRequest : IRequest<DeleteMultiplesOptionsResponse>
+    public class DeleteOptionsRequest : IRequest<DeleteOptionsResponse>
     {
         public IEnumerable<Guid> OptionsIds { get; set; }
     }

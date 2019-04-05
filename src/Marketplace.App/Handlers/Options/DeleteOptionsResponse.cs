@@ -1,9 +1,9 @@
 ﻿namespace Marketplace.App.Handlers.Options
 {
-    public class DeleteMultiplesOptionsResponse
+    public class DeleteOptionsResponse
     {
         public int DeletedOptionsCount { get; set; }
-        public DeleteMultiplesOptionsResponse(int deletedOptionsCount)
+        public DeleteOptionsResponse(int deletedOptionsCount)
         {
             this.DeletedOptionsCount = deletedOptionsCount;
         }
