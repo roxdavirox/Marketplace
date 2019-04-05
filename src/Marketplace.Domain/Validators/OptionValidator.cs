@@ -9,7 +9,7 @@ namespace Marketplace.Domain.Validators
         {
             RuleFor(p => p.Name)
                 .NotEmpty().WithMessage("O nome da opção não pode ser vazio")
-                .Length(3, 50).WithMessage("O nome deve conter entre 3 e 50 caracteres");
+                .Length(1, 50).WithMessage("O nome deve conter entre 1 e 50 caracteres");
         }
     }
 }

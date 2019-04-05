@@ -9,7 +9,7 @@ namespace Marketplace.Domain.Validators
         {
             RuleFor(_ => _.Name)
                 .NotEmpty().WithMessage("Nome não pode ser vazio")
-                .Length(3, 50).WithMessage("O Nome deve conter entre 3 e 50 caracteres");
+                .Length(1, 50).WithMessage("O Nome deve conter entre 1 e 50 caracteres");
 
             RuleFor(_ => _.Email)
                 .NotEmpty().WithMessage("E-mail não pode ser vazio")
