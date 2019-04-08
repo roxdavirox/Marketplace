@@ -1,10 +1,12 @@
 ﻿using Marketplace.Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Marketplace.App.Handlers.Prices
 {
     public class _Price
     {
+        public Guid IdPrice { get; set;}
         public int Start { get; set; }
         public int End { get; set; }
         public decimal Value { get; set; }
