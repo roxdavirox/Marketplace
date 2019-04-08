@@ -29,7 +29,14 @@ namespace Marketplace.Infra.Data.Repositories
             await _context.Prices.AddRangeAsync(prices);
         }
 
-        public async Task<IEnumerable<Price>> GetPricesByPriceRangeIdAsync(Guid idPriceRange)
+    public async Task<IEnumerable<Price>> GetByIdsAsync(IEnumerable<Guid> pricesIds)
+    {
+      var prices = _context.Prices.Where(p => pricesIds.Contains(p.Id));
+
+      return await prices.ToListAsync();
+    }
+
+    public async Task<IEnumerable<Price>> GetPricesByPriceRangeIdAsync(Guid idPriceRange)
         {
             var priceRange = await _context.PriceRange
                 .Include(_ => _.Prices)
@@ -37,5 +44,14 @@ namespace Marketplace.Infra.Data.Repositories
 
             return priceRange.Prices.ToList();
         }
+
+    public async Task<int> RemoveRangeAsync(IEnumerable<Price> prices)
+    {
+      _context.Prices.RemoveRange(prices);
+
+      var deletedCount = prices.Count();
+
+      return await Task.FromResult<int>(deletedCount);
     }
+  }
 }
