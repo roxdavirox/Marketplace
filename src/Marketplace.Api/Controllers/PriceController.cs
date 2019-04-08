@@ -35,5 +35,9 @@ namespace Marketplace.Api.Controllers
         [HttpGet("api/Price/{idPriceRange:Guid}"), AllowAnonymous]
         public async Task<GetPricesResponse> GetByPriceRangeId(Guid idPriceRange) =>
             await _mediator.Send(new GetPricesRequest(idPriceRange));
+
+        [HttpDelete("api/Price"), AllowAnonymous]
+        public async Task<DeletePricesResponse> Delete(DeletePricesRequest request) =>
+            await _mediator.Send(request);
     }
 }
