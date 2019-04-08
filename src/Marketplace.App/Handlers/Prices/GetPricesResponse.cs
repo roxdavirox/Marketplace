@@ -26,6 +26,7 @@ namespace Marketplace.App.Handlers.Prices
             {
                 Prices.Add(new _Price
                 {
+                    IdPrice = price.Id,
                     Start = price.Start,
                     End = price.End,
                     Value = price.Value
