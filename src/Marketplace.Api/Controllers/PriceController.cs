@@ -36,6 +36,11 @@ namespace Marketplace.Api.Controllers
         public async Task<GetPricesResponse> GetByPriceRangeId(Guid idPriceRange) =>
             await _mediator.Send(new GetPricesRequest(idPriceRange));
 
+        /// <summary>
+        /// Deleta um ou mais Prices a partir de seus Ids
+        /// </summary>
+        /// <param name="request">Request com uma lista de Ids de Prices que serão deletados</param>
+        /// <returns>Retorna a quantidade de Prices deletados</returns>
         [HttpDelete("api/Price"), AllowAnonymous]
         public async Task<DeletePricesResponse> Delete(DeletePricesRequest request) =>
             await _mediator.Send(request);
