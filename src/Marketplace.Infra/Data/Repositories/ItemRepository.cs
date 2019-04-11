@@ -35,9 +35,13 @@ namespace Marketplace.Infra.Data.Repositories
         {
             var option = await _context.Options
                 .Include(o => o.Items)
+                .Include(o => o.Items)
+                    .ThenInclude(i => i.PriceRange)
                 .FirstOrDefaultAsync(o => o.Id == idOption);
 
-            return option.Items.ToList();
+            var items = option.Items.ToList();
+
+            return items;
         }
 
         public async Task CreateRangeAsync(IEnumerable<Item> items) =>
