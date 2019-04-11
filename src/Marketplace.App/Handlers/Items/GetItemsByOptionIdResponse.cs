@@ -8,6 +8,7 @@ namespace Marketplace.App.Handlers.Items
     public class _Item
     {
         public Guid IdItem { get; set; }
+        public Guid? IdPriceRange { get; set; }
         public string Name { get; set; }
     }
 
@@ -22,7 +23,11 @@ namespace Marketplace.App.Handlers.Items
             Items = new List<_Item>();
 
             items.ForEach(i => 
-                Items.Add(new _Item { IdItem = i.Id, Name = i.Name })
+                Items.Add(new _Item { 
+                    IdItem = i.Id, 
+                    Name = i.Name, 
+                    IdPriceRange = i.PriceRange?.Id 
+                })
             );
         }
     }
