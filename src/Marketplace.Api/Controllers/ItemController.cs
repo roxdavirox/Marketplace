@@ -63,7 +63,7 @@ namespace Marketplace.Api.Controllers
         /// Remove a associação com uma Tabela de preço
         /// </summary>
         /// <param name="idItem">idItem que perderá a referencia com uma tabela de preço</param>
-        /// <returns>Retorna o Id do item</returns>
+        /// <returns>Retorna o Id e nome do item</returns>
         [HttpDelete("api/items/{idItem:Guid}"), AllowAnonymous]
         public async Task<RemovePriceRangeResponse> Remove(Guid idItem) =>
             await _mediator.Send(new RemovePriceRangeRequest(idItem));
