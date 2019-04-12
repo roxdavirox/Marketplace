@@ -48,7 +48,10 @@ namespace Marketplace.Infra.Data.Repositories
             await _context.Items.AddRangeAsync(items);
 
         public async Task<Item> GetByIdAsync(Guid idItem) =>
-            await _context.Items.FindAsync(idItem);
+            await Task.FromResult(_context.Items
+                        .Include(i => i.PriceRange)
+                        .FirstOrDefault(i => i.Id == idItem)
+                );
 
         public async Task<int> RemoveRange(IEnumerable<Item> items)
         {

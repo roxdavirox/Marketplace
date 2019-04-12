@@ -21,7 +21,6 @@ namespace Marketplace.Infra.Data.EF.Maps
                 .WithMany(_ => _.Items)
                 .OnDelete(DeleteBehavior.SetNull)
                 .HasForeignKey("IdPriceRange");
-
         }
     }
 }
