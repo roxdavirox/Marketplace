@@ -41,6 +41,8 @@ namespace Marketplace.Domain.Entities
             PriceRange = priceRange;
         }
 
-        public void RemovePriceRange() => PriceRange = null;
+        public void RemovePriceRange() {
+            this.PriceRange = null;
+        }
     }
 }
